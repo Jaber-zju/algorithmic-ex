@@ -10,35 +10,38 @@
     
     // 方法一，先对数组升序排序，然后再一次对头尾两个元素求和操作
     function searchK1(arr, k) {
-      arr.sort((a, b) => a - b)
+      let copy = [...arr]
+      copy.sort((a, b) => a - b)
       let i = 0
-      let j = arr.length - 1
+      let j = copy.length - 1
       while (i < j) {
-        let sum = arr[i] + arr[j]
+        let sum = copy[i] + copy[j]
         if (sum < k) {
           i++
         } else if (sum > k) {
           j--
         } else {
-          return true
+          // console.log(arr.indexOf(copy[i]))
+          // console.log(arr.indexOf(copy[j]))
+          return [arr.indexOf(copy[i]), arr.indexOf(copy[j])]
         }
       }
       return false
     }
-    // console.log(searchK1(arr1, 53))
+    console.log(searchK1(arr1, 53))
     
-    // 方法二：遍历数组每个元素，让它与后面的每一个元素相加求和
+    // 方法二：遍历数组每个元素，让它与后面的每一个元素相加求和,返回数组下标
     function searchK2(arr, k) {
       for (let i = 0; i < arr.length - 1; i++) {
         for (let j = i + 1; j < arr.length; j++) {
           if (arr[i] + arr[j] == k) {
-            return true
+            return [i, j]
           }
         }
       }
       return false
     }
-    console.log(searchK2(arr1, 31))
+    // console.log(searchK2(arr1, 31))
     
     
   </script>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>寻找两个正序数组的中位数</title>
+</head>
+<body>
+<!--给定两个大小为 m 和 n 的正序（从小到大）数组 nums1 和 nums2。-->
+
+<!--请你找出这两个正序数组的中位数，并且要求算法的时间复杂度为 O(log(m + n))。-->
+
+<!--你可以假设 nums1 和 nums2 不会同时为空。-->
+
+<!-- -->
+
+<!--示例 1:-->
+
+<!--nums1 = [1, 3]-->
+<!--nums2 = [2]-->
+
+<!--则中位数是 2.0-->
+
+<script type="text/javascript">
+  const nums1 = [1, 2, 6]
+  const nums2 = [3, 4, 5]
+  
+  // 方法一：先将两个数组拼接再排序，判断拼接后的数组长度，若为奇数，则取中间元素即可；若是偶数，则是中间两个元素取平均值
+  findMedianSortedArrays = function(nums1, nums2) {
+    // arr.concat()并不会改变原数组，结果返回一个新数组
+    let arr = nums1.concat(nums2)
+    // console.log(arr)
+    // Object.assign()拼接数组时后面的数组会替换掉相同位置（下标相同）的元素，若元素没有对应位置的元素，则不会替换，保留下来
+    // console.log(Object.assign([], nums1, nums2))
+    
+    arr.sort((a, b) => a - b)
+    console.log(arr)
+    const len = arr.length
+    if (len % 2 !== 0) {
+      return arr[(len-1) / 2]
+    } else {
+      const res = (arr[len/2] + arr[len/2 - 1]) / 2
+      return res
+    }
+  }
+  
+  // 方法二：
+
+  console.log(findMedianSortedArrays(nums1, nums2))
+</script>
+
+</body>
+</html>

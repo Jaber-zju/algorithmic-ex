@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数</title>
+</head>
+<body>
+
+  <script type="text/javascript">
+    // 方法一：将数字转为字符串，再取反，循环遍历逐一对比
+    // isPalindrome = function(x) {
+    //   const str1 = (x + '').split('')
+    //   const str2 = str1.reverse()
+    //   let count = 0
+    //   let result = true
+    //   for (let i=0; i < str1.length; i++) {
+    //     // 此处有个怪异的现象：str2是由str1反转而来，元素的下标不变
+    //     if (str1[i] !== str2[str1.length - i -1]) {
+    //       count++
+    //       break
+    //     }
+    //   }
+    //   count === 0 ? result = true : result = false
+    //   return result
+    // }
+    // console.log(isPalindrome(-121))
+    
+    // 方法二：运用高阶函数
+    // isPalindrome = function(x) {
+    //   if ( x < 0 ) return false
+    //   let str = '' + x
+    //   return Array.from(str).reverse().join('') === str
+    // }
+    // console.log(isPalindrome(121))
+    
+    // 方法三：将数字转换成字符串A，从后往前循环字符串A，将循环出来的字符拼接成新的字符串B，比较字符串A和B，得出结论
+    // isPalindrome = function(x) {
+    //   let str = '' + x
+    //   let newStr = ''
+    //   for(let len = str.length, i = len - 1; i >= 0 ; i--) {
+    //     newStr += str[i]
+    //   }
+    //   return newStr === str
+    // }
+    // console.log(isPalindrome(121))
+
+    // 方法四：以中间数为节点，判断左右两边首尾是否相等
+    isPalindrome = function(x) {
+      if ( x < 0 || (x !== 0 && x % 10 === 0)) {
+        return false
+      } else if ( 0 <= x && x < 10) {
+        return true
+      }
+      x = '' + x
+      for(let i = 0 ; i < x.length/2; i++) {
+        if (x[i] !== x[x.length - i - 1]) {
+          return false
+        }
+      }
+      return true
+    }
+    console.log(isPalindrome(-121))
+
+
+  </script>
+
+</body>
+</html>

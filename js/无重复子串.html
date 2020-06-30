@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>无重复字符的最长子串</title>
+</head>
+<body>
+<script>
+  const s = "dvdf"
+
+  lengthOfLongestSubstring = function(s) {
+    let reg = /^[ ]$/
+    // console.log(reg.test(s))
+    // console.log(Boolean(s.trim()))
+    if (s.length === 0) {
+      return 0
+    } else if (!Boolean(s.trim()) || s.length === 1) {
+      return 1
+    } else if (s.length === 2) {
+      if (s[0] === s[1]) return 1
+      else return 2
+    } else {
+      const sArray = s.split('')
+      console.log(sArray)
+      const len = sArray.length
+      let qLen = 0
+      const lenArray = []
+
+      let strArray = []
+      let itemArray = []
+      for (let i=0; i<len; i++) {
+        if (itemArray.indexOf(sArray[i]) === -1) {
+          itemArray.push(sArray[i])
+          strArray.push(itemArray)
+        } else {
+          strArray.push(itemArray)
+          itemArray = []
+          itemArray.push(sArray[i])
+        }
+      }
+      console.log(strArray)
+      for (let j = 0; j<strArray.length; j++) {
+        lenArray.push(strArray[j].length)
+      }
+      // console.log(lenArray)
+      return Math.max(...lenArray)
+    }
+  };
+  // console.log(lengthOfLongestSubstring(s))
+
+  lengthOfLongestSubstring2 = function(s) {
+    let substr = '', maxLength = 0;
+    for (let i = 0; i < s.length; i++) {
+      let findIndex = substr.indexOf(s[i]);
+      // ~(-1)=
+      if (~findIndex) {
+        substr = substr.substring(findIndex + 1);
+      }
+      substr += s[i];
+      if (substr.length > maxLength) {
+        maxLength = substr.length;
+      }
+    }
+    return maxLength;
+  };
+  
+  console.log(lengthOfLongestSubstring2(s))
+  
+</script>
+
+</body>
+</html>

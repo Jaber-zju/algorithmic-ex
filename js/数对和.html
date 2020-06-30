@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>设计一个算法，找出数组中两数之和为指定值的所有整数对。一个数只能属于一个数对。</title>
+</head>
+<body>
+<script type="text/javascript">
+  // 设计一个算法，找出数组中两数之和为指定值的所有整数对。一个数只能属于一个数对。
+  /*示例 2:
+
+  输入: nums = [5,6,5,6], target = 11
+  输出: [[5,6],[5,6]]*/
+  /**
+   * @param {number[]} nums
+   * @param {number} target
+   * @return {number[][]}
+   */
+  const nums = [5]
+  const target = 0
+  
+  // 方法一：对数组进行二次循环遍历，复杂度为n*n，为了避免一个元素同时在多个数对中，每次取到满足条件的值之后就要立即删掉两个元素
+  //       并且，为了避免陷入死循环，设置一个计数器，当循环次数多到一定时，退出循环，返回结果、
+  // 注意：这种方法不适合长度很长的数组，适合较短的数组
+  
+  // pairSums = function (nums, target) {
+  //   let result = []
+  //   let count = 0
+  //   if (nums.length === 0) {
+  //     return result
+  //   } else {
+  //     while (nums.length > 0) {
+  //       for (let i = 0; i < nums.length - 1; i++) {
+  //         for (let j = i + 1; j < nums.length; j++) {
+  //           if (nums[i] + nums[j] == target) {
+  //             result.push([nums[i], nums[j]])
+  //             nums.splice(j, 1)
+  //             nums.splice(i, 1)
+  //           }
+  //         }
+  //       }
+  //       count+=1
+  //       if (count > nums.length) {
+  //         return result
+  //       }
+  //     }
+  //   }
+  // }
+  
+  
+  // 方法二：
+  
+  // console.log(pairSums(nums, target))
+  console.log(getSum2(nums, target))
+
+</script>
+
+</body>
+</html>
