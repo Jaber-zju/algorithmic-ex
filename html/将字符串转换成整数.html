@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>将字符串转换成整数</title>
+</head>
+<body>
+  <script type="text/javascript">
+    /**
+     * @param {string} str
+     * @return {number}
+     */
+    //题目描述：https://leetcode-cn.com/problems/string-to-integer-atoi/
+    
+    // 方法一：分情况：当字符串为空时，返回0；当字符串可以用Number强制转换（即为number类型的字符串）时，返回Number(str)；
+    //              当字符串包含数字与字符时，需要用到正则表达式取其中的数字
+    // myAtoi = function(str) {
+    //   if (!str) {
+    //     return 0
+    //   } else if (Number(str)) {
+    //     return Number(str)
+    //   } else {
+    //     // alert(Number(str))
+    //     const arr = str.split('')
+    //     console.log(arr)
+    //     let res = ''
+    //     if (arr[0] !== '-' && !Number(arr[0])) {   // 字母开头的字符串
+    //       return 0
+    //     } else if (arr[0] !== '-' && Number(arr[0])) {   // 数字开头的字符串
+    //       for (let i = 0; i < arr.length; i++) {
+    //         if (Number(arr[i])) {
+    //           res += arr[i]
+    //         } else {
+    //           return Number(res)
+    //         }
+    //       }
+    //     } else if (arr[0] === '-') {    // - 开头的字符串
+    //       for (let i = 1; i < arr.length; i++) {
+    //         if (Number(arr[i])) {
+    //           res += arr[i]
+    //         } else {
+    //           return -Number(res)
+    //         }
+    //       }
+    //     }
+    //   }
+    // };
+    // console.log(myAtoi(str3))
+    
+    // 方法二：用parseInt来做
+    myAtoi = (str) => {
+      return Math.max(Math.min(parseInt(str) || 0, 2147483647), -2147483648)
+    }
+    console.log(myAtoi('-www1234'))
+  </script>
+
+</body>
+</html>
