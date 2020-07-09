@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>最长回文子串</title>
+</head>
+<body>
+<script type="text/javascript">
+  // 题目描述：给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。
+  // https://leetcode-cn.com/problems/longest-palindromic-substring/
+
+  /**
+   * @param {string} s
+   * @return {string}
+   */
+  // longestPalindrome = function(s) {
+  //   if (s.length === 1) {
+  //     return s
+  //   } else if (s.length === 2) {
+  //     if (s.charAt(0) === s.charAt(1)) return s
+  //     return s.charAt(0)
+  //   } else {
+  //     let res = []
+  //     for (let i = 0; i < s.length; i++) {
+  //       if (s.charAt(i) === s.charAt(i+1)) {
+  //         res.push(s.slice(i, i+2))
+  //         for (let j = 0; j <= i; j++) {
+  //           if (s.charAt(i-j) === s.charAt(i+j)) {
+  //             res.push(s.slice(i-j, i+j+1))
+  //           }
+  //         }
+  //         // break
+  //       } else {
+  //         for (let j = 0; j <= i; j++) {
+  //           if (s.charAt(i-j) === s.charAt(i+j)) {
+  //             res.push(s.slice(i-j, i+j+1))
+  //           } else {
+  //             break
+  //           }
+  //         }
+  //       }
+  //     }
+  //     let result = res[0]
+  //     let max = 0
+  //     if (res.length === 1) result = res[0]
+  //     else {
+  //       res.forEach((item, index) => item.length > max ? (result = res[index], max = item.length) : result = result )
+  //     }
+  //     console.log(res)
+  //     return result
+  //   }
+  // };
+  
+  // 方法二
+  /**
+   * @param {string} s
+   * @return {string}
+   */
+  longestPalindrome = function(s) {
+    let palindromes = [];
+
+    if(s.length <= 1) {
+      return s;
+    }
+
+    for (let i = 0; i < s.length; i++) {
+      let j = 0;
+      let k = 0;
+      while(s[i + j] === s[i - j] && s[i + j] && s[i - j]) {
+        j++;
+      };
+      palindromes.push(s.slice(i-(j-1), i+j)) //even palindromes
+      j = 0;
+
+      while(s[(i + 1) + k] === s[i - k] && s[(i + 1) + k] && s[i - k]){
+        k++;
+      }
+      palindromes.push(s.slice(i-(k-1),(i+1)+k)) //odd palindromes
+      k = 0;
+    }
+    return palindromes.sort((a, b) => {
+      return b.length - a.length
+    })[0]
+  }
+  const str1 = "aaaa"
+  console.log(longestPalindrome(str1))
+</script>
+
+</body>
+</html>
