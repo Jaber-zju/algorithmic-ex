@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <script TYPE="text/javascript">
+    /**
+     * @param {string} s
+     * @param {number} numRows
+     * @return {string}
+     */
+    const convert = function (s, numRows) {
+      // 如果只有一行，则直接返回
+      if (numRows === 1) {
+        return s
+      }
+      let arr = [], line = 0, direction = 'down', res = ''
+      // 每一行都是一个数组，独立存在
+      for (let i = 0; i < numRows; i++) {
+        arr[i] = []
+      }
+      
+      // 对字符串进行遍历，一行一行的添加字符
+      for (let i = 0; i < s.length; i++) {
+        // 把字符放在对应的行数组里面，行数由下面的条件语句判断
+        arr[line].push(s[i])
+        // 如果处于第一行，则行数增加，方向为下，进入下一行
+        if (line === 0) {
+          line++
+          direction = 'down'
+        } else if (line === numRows - 1) {  // 如果处于最后一行，则行数减少，方向为上，进入上一行
+          line--
+          direction = 'up'
+        } else {  // 如果处于中间行，如果之前的方向是下，则行数增加，方向还是下，向下进入一行
+          if (direction === 'down') {
+            line++
+            direction = 'down'
+          } else {  // 如果处于中间行，如果之前的方向是上，则行数减少，方向还是上，向上进入一行
+            line--
+            direction = 'up'
+          }
+        }
+      }
+      
+      // 对arr数组中的字符取出来拼接成字符串输出
+      for (let i = 0; i < arr.length; i++) {
+        res = res.concat(arr[i].join(''))
+        // res = res + arr[i].join('')
+      }
+      
+      return res
+    }
+    const s = 'LEETCODEISHIRING'
+    const numRows = 4
+    console.log(convert(s, numRows))
+  </script>
+</body>
+</html>
