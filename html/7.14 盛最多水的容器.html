@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>盛最多水的容器</title>
+</head>
+<body>
+  <script type="text/javascript">
+    /**
+     * @param {number[]} height
+     * @return {number}
+     */
+    const maxArea = height => {
+      let area = 0
+      let maxWater = 0
+      let h = 0
+      let w = 0
+      for (let i = 0; i < height.length; i++) {
+        for (let j = height.length - 1; j > i; j--) {
+          h = Math.min(height[i], height[j])
+          w = j - i
+          area = h * w
+          if (area > maxWater) maxWater = area
+        }
+      }
+      return maxWater
+    };
+    const height = [1,8,6,2,5,4,8,3,7]
+    console.log(maxArea(height))
+  </script>
+
+</body>
+</html>
