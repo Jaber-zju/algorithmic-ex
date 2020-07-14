@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>罗马数字转数字</title>
+</head>
+<body>
+<script type="text/javascript">
+  /**
+   * @param {number} num
+   * @return {string}
+   */
+  const romanToInt = function(s) {
+    const numArr = [1000,900, 500,400, 100, 90,  50, 40, 10,   9,  5,   4,  1]
+    const strArr = ['M','CM','D', 'CD','C','XC','L','XL','X','IX','V','IV','I']
+    let res = 0
+    const len = s.length
+    s = s.split('')
+    for (let j = 0; j < len; j++) {
+      for (let i = 0; i < strArr.length; i++) {
+        if (s[j] + s[j+1] === strArr[i]) {
+          res += numArr[i]
+          s.splice(j, 2)
+        }
+        if (s[j] === strArr[i]) {
+          res += numArr[i]
+        }
+      }
+    }
+    return res
+  };
+  const s = 'LVIII'
+  romanToInt(s)
+  console.log(romanToInt(s))
+</script>
+
+</body>
+</html>
