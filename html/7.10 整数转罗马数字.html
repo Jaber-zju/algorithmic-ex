@@ -2,9 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <title>整数转罗马数字</title>
 </head>
 <body>
-$END$
+  <script type="text/javascript">
+    /**
+     * @param {number} num
+     * @return {string}
+     */
+    const intToRoman = function(num) {
+      if (num < 1 || num > 3999) return
+      const numArr = [1000,900,500,400,100,90,50,40,10,9,5,4,1]
+      const strArr = ['M','CM','D', 'CD','C','XC','L','XL','X','IX','V','IV','I']
+      let res = ''
+      for (let i = 0; i < numArr.length; i++) {
+        while (num >= numArr[i]) {
+          num = num - numArr[i]
+          res = res + strArr[i]
+          if (num === 0) return res
+        }
+      }
+      return res
+    };
+    const num = 1994
+    intToRoman(num)
+    console.log(intToRoman(num))
+  </script>
+
 </body>
 </html>
