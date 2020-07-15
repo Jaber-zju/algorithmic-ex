@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>电话号码的字母组合</title>
+</head>
+<body>
+  <script type="text/javascript">
+    /**
+     * @param {string} digits
+     * @return {string[]}
+     */
+    const letterCombinations = (digits) => {
+      // 自己的方法，无法通过
+      // const numArr = ['2', '3', '4', '5', '6', '7', '8', '9']
+      // const letterArr = [['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i'], ['j', 'k', 'l'], ['m', 'n', 'o'], ['p', 'q', 'r', 's'], ['t', 'u', 'v'], ['w', 'x', 'y', 'z']]
+      // let arr = []
+      // let res = []
+      // let length = 0
+      // for (let i = 0; i < digits.length; i++) {
+      //   let index = numArr.indexOf(digits[i])
+      //   arr.push(letterArr[index])
+      //   if (letterArr[index].length >= length) length = letterArr[index].length
+      // }
+      // if (arr.length === 1) return arr[0]
+      //
+      // for (let i = 0; i < arr.length - 1; i++) {
+      //   for (let j = i + 1; j < arr.length; j++) {
+      //     for (let k = 0; k < length; k++) {
+      //       for (let c = 0; c < length; c++) {
+      //         if (res.length > 0) {
+      //           for (let m = 0; m < res.length; m++) {
+      //             res.push(arr[i][k] + arr[j][c] + res[m])
+      //           }
+      //         } else {
+      //           res.push(arr[i][k] + arr[j][c])
+      //         }
+      //       }
+      //     }
+      //   }
+      // }
+      // return res
+      
+      // 百度的方法，验证通过
+      digits += ""
+      let arr = {2: ['a', 'b', 'c'],
+        3: ['d', 'e', 'f'],
+        4: ['g', 'h', 'i'],
+        5: ['j', 'k', 'l'],
+        6: ['m', 'n', 'o'],
+        7: ['p', 'q', 'r', 's'],
+        8: ['t', 'u', 'v'],
+        9: ['w', 'x', 'y', 'z']
+      }; //先设一个数组
+      let item=[];
+      for(let i=0;i<digits.length;i++){
+        let num=digits[i];
+        if(item=="")
+          item=arr[num];
+        else{
+          let list=[];
+          for(j=0;j<item.length;j++){
+            for(k=0;k<arr[num].length;k++){
+              list.push(item[j]+arr[num][k])
+            }
+          }
+          item=list
+        }
+      }
+      return item
+    }
+    const digits = '234'
+    console.log(letterCombinations(digits))
+  </script>
+
+</body>
+</html>
