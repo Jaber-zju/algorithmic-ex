@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>最长公共前缀</title>
+</head>
+<body>
+  <script type="text/javascript">
+    /**
+     * @param {string[]} strs
+     * @return {string}
+     */
+    const longestCommonPrefix = strs => {
+      let res = '' // 结果
+      let chart = ''  // 每次遍历时比较的字母
+      let s1 = ''  // 取一个不为空的字符串，每次都是从这里面取字符出来进行对比
+      
+      // 首先对字符串数组遍历，是否存在空字符串，若有则之间返回""，若没有，则返回最后一个不为空的字符串
+      for (let i = 0; i < strs.length; i++) {
+        if (strs[i] !== '') {
+          s1 = strs[i]
+        } else {
+          return res
+        }
+      }
+      console.log(s1)
+      
+      // 首先对取出的字符串遍历，在第i轮的遍历中，依次取出数组中每个字符串的第i位字符进行对比
+      for (let i = 0; i < s1.length; i++) {
+        // 每次取出字符串的一个字母
+        chart = s1[i]
+        for (let j = 0; j < strs.length; j++) {
+          // 只要有任何一个字符串的i位和字母不符合，直接返回结果
+          if (strs[j][i] !== chart) return res
+            // 否则，继续执行
+          else continue
+        }
+        // 结果是每次符合条件的字母的拼接
+        res = res + chart
+      }
+      return res
+    }
+    // const strs = ["flower","flow","flight"]
+    const strs = ["a","b"]
+    console.log(longestCommonPrefix(strs))
+  </script>
+
+</body>
+</html>
