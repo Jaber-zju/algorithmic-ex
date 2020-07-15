@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>四数之和</title>
+</head>
+<body>
+  <script type="text/javascript">
+    /**
+     * @param {number[]} nums
+     * @param {number} target
+     * @return {number[][]}
+     */
+    const fourSum = (nums, target) => {
+      nums=nums.sort(function(a,b){return a-b});//先排序
+      let arr=[];
+      for(i=0;i<nums.length-3;i++){//第一个
+        if (i>0 && nums[i-1]==nums[i]) continue
+        for(j=i+1;j<nums.length-2;j++){//第二个
+          if (j>i+1 && nums[j-1]==nums[j]) continue
+          let k=nums.length-1
+          let c=j+1;
+          while(c<nums.length-1&&c!=k){//第三个
+            let sum=nums[i]+nums[j]+nums[c]+nums[k]
+            if (c>j+1 &&nums[c]== nums[c-1]){
+              c++;
+              continue;
+            }
+            if (k<nums.length-1 &&nums[k]==nums[k+1]){
+              k--;
+              continue;
+            }
+            if(sum==target){
+              arr.push([nums[i],nums[j],nums[c],nums[k]]);
+              c++
+              k=nums.length-1
+            }
+            else if(sum<target){
+              c++
+            }
+            else{
+              k--
+            }
+          }
+        }
+      }
+      return arr
+      
+      // 方法二
+      // let sum = 0
+      // let res = []
+      // let flag = false
+      // for (let i = 0; i < nums.length - 3; i++) {
+      //   for (let j = i+1; j < nums.length - 2; j++) {
+      //     for (let k = j+1; k < nums.length - 1; k++) {
+      //       for (let l = k+1; l < nums.length; l++) {
+      //         sum = nums[i] + nums[j] + nums[k] + nums[l]
+      //         sum === target ? res.push([nums[i], nums[j], nums[k], nums[l]]) : null
+      //       }
+      //     }
+      //   }
+      // }
+      //
+      // for (let i = 0; i < res.length - 1; i++) {
+      //   for (let j = i+1; j < res.length; j++) {
+      //     if (res[i].sort().join('') === res[j].sort().join('')) {
+      //       res.splice(j, 1)
+      //       flag = true
+      //     }
+      //   }
+      //   if (flag) i--
+      // }
+      // return res
+    };
+    const nums = [-5,5,4,-3,0,0,4,-2]
+    const target = 4
+    console.log(fourSum(nums, target))
+  </script>
+
+</body>
+</html>

@@ -12,9 +12,13 @@
      * @return {number}
      */
     const threeSumClosest = (nums, target) => {
+      // 三数之和
       let sum = 0
+      // 三数之和与目标值之间的差距
       let dec = 0
+      // 三数之和与目标值之间的最小差距
       let min = Math.abs(nums[0] + nums[1] + nums[2] - target)
+      // 输出的结果
       let res = 0
       if (nums.length === 3) return nums[0] + nums[1] + nums[2]
       if (nums.length < 3 || nums.length > Math.pow(10, 3) || target < -Math.pow(10, 4) || target > Math.pow(10, 4)) return
