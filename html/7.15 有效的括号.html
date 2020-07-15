@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>有效的括号</title>
+</head>
+<body>
+  <script type="text/javascript">
+    /**
+     * @param {string} s
+     * @return {boolean}
+     */
+    const isValid = function(s) {
+      // 应用到堆栈的思想，先进后出
+      let str = []
+      for (let i = 0; i < s.length; i++) {
+        if (s[i] === '(') {
+          str.push(')')
+        } else if (s[i] === '{') {
+          str.push('}')
+        } else if (s[i] === '[') {
+          str.push(']')
+        } else if (s[i] !== str.pop()) {
+          return false
+        }
+      }
+      return !str.length
+    };
+    // const s = '(([]){})'
+    // const s = '([)]'
+    const s = "(([]){})"
+    console.log(isValid(s))
+  </script>
+</body>
+</html>
