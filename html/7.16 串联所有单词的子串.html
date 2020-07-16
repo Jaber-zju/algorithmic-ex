@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>串联所有单词的子串</title>
+</head>
+<body>
+  <script type="text/javascript">
+    // 题目链接：https://leetcode-cn.com/problems/substring-with-concatenation-of-all-words/
+
+    /**
+     * @param {string} s
+     * @param {string[]} words
+     * @return {number[]}
+     */
+    const findSubstring = function(s, words) {
+      // 单词位置结果保存数组
+      let res = []
+      
+      // 判断单词数组是否为空，若空，则直接返回空数组
+      if (words.length === 0) {
+        return res
+      }
+      let result = []  // 数组单词拼接起来的所有情况存进数组
+      let num = words.length
+      
+      // TODO: 难点
+      // 根据words里面单词，按不同顺序进行拼接，得到所有不同顺序的拼接情况
+      const joinStr = (remainWords, words) => {
+        if (remainWords.length === num) {
+          result.push(remainWords);
+        } else {
+          words.forEach((item, index) => {
+            let templateWords = [].concat(words);
+            templateWords.splice(index, 1);
+            joinStr(remainWords.concat(item), templateWords);
+          });
+        }
+        return result.map(item => {
+          return s.indexOf(item.join(''));
+        }).filter(item => {
+          return item !== -1
+        }).sort();
+      }
+      joinStr([], words)
+      
+      // 对字符串进行遍历
+      for (let i = 0; i < s.length; i++) {
+        // 每遍历到一个字母，遍历数组，把不同顺序排列的单词拼接字符串在原字符串中开始匹配
+        for (let j = 0; j < result.length; j++) {
+          const str = result[j].join('')
+          const len = str.length
+          // 从第i个字母开始，截取和数组中字符串相同长度，二者对比，若一致，则将i加进res
+          if (s.substr(i, len) === str) {
+            if (res.indexOf(i) === -1) res.push(i)
+          }
+        }
+      }
+      return res
+    }
+    const s = "pjzkrkevzztxductzzxmxsvwjkxpvukmfjywwetvfnujhweiybwvvsrfequzkhossmootkmyxgjgfordrpapjuunmqnxxdrqrfgkrsjqbszgiqlcfnrpjlcwdrvbumtotzylshdvccdmsqoadfrpsvnwpizlwszrtyclhgilklydbmfhuywotjmktnwrfvizvnmfvvqfiokkdprznnnjycttprkxpuykhmpchiksyucbmtabiqkisgbhxngmhezrrqvayfsxauampdpxtafniiwfvdufhtwajrbkxtjzqjnfocdhekumttuqwovfjrgulhekcpjszyynadxhnttgmnxkduqmmyhzfnjhducesctufqbumxbamalqudeibljgbspeotkgvddcwgxidaiqcvgwykhbysjzlzfbupkqunuqtraxrlptivshhbihtsigtpipguhbhctcvubnhqipncyxfjebdnjyetnlnvmuxhzsdahkrscewabejifmxombiamxvauuitoltyymsarqcuuoezcbqpdaprxmsrickwpgwpsoplhugbikbkotzrtqkscekkgwjycfnvwfgdzogjzjvpcvixnsqsxacfwndzvrwrycwxrcismdhqapoojegggkocyrdtkzmiekhxoppctytvphjynrhtcvxcobxbcjjivtfjiwmduhzjokkbctweqtigwfhzorjlkpuuliaipbtfldinyetoybvugevwvhhhweejogrghllsouipabfafcxnhukcbtmxzshoyyufjhzadhrelweszbfgwpkzlwxkogyogutscvuhcllphshivnoteztpxsaoaacgxyaztuixhunrowzljqfqrahosheukhahhbiaxqzfmmwcjxountkevsvpbzjnilwpoermxrtlfroqoclexxisrdhvfsindffslyekrzwzqkpeocilatftymodgztjgybtyheqgcpwogdcjlnlesefgvimwbxcbzvaibspdjnrpqtyeilkcspknyylbwndvkffmzuriilxagyerjptbgeqgebiaqnvdubrtxibhvakcyotkfonmseszhczapxdlauexehhaireihxsplgdgmxfvaevrbadbwjbdrkfbbjjkgcztkcbwagtcnrtqryuqixtzhaakjlurnumzyovawrcjiwabuwretmdamfkxrgqgcdgbrdbnugzecbgyxxdqmisaqcyjkqrntxqmdrczxbebemcblftxplafnyoxqimkhcykwamvdsxjezkpgdpvopddptdfbprjustquhlazkjfluxrzopqdstulybnqvyknrchbphcarknnhhovweaqawdyxsqsqahkepluypwrzjegqtdoxfgzdkydeoxvrfhxusrujnmjzqrrlxglcmkiykldbiasnhrjbjekystzilrwkzhontwmehrfsrzfaqrbbxncphbzuuxeteshyrveamjsfiaharkcqxefghgceeixkdgkuboupxnwhnfigpkwnqdvzlydpidcljmflbccarbiegsmweklwngvygbqpescpeichmfidgsjmkvkofvkuehsmkkbocgejoiqcnafvuokelwuqsgkyoekaroptuvekfvmtxtqshcwsztkrzwrpabqrrhnlerxjojemcxel"
+    const words = ["dhvf","sind","ffsl","yekr","zwzq","kpeo","cila","tfty","modg","ztjg","ybty","heqg","cpwo","gdcj","lnle","sefg","vimw","bxcb"]
+    console.log(findSubstring(s, words))
+  </script>
+</body>
+</html>
