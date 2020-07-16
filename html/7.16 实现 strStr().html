@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>实现 strStr()</title>
+</head>
+<body>
+  <script type="text/javascript">
+    // 题目链接：https://leetcode-cn.com/problems/implement-strstr/
+
+    /**
+     * @param {string} haystack
+     * @param {string} needle
+     * @return {number}
+     */
+    const strStr = function(haystack, needle) {
+      if (!needle) return 0
+      const len = needle.length
+      for (let i = 0; i< haystack.length; i++) {
+        if (haystack.substr(i, len) === needle) return i
+      }
+      return -1
+    };
+    // const haystack = "hello", needle = "ll"
+    const haystack = "aaaaa", needle = "bba"
+    console.log(strStr(haystack, needle))
+  </script>
+
+</body>
+</html>
