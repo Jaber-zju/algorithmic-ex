@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>两数相除</title>
+</head>
+<body>
+  <script type="text/javascript">
+    // 题目链接：https://leetcode-cn.com/problems/divide-two-integers/
+
+    /**
+     * @param {number} dividend
+     * @param {number} divisor
+     * @return {number}
+     */
+    const divide = function(dividend, divisor) {
+      let result = 0, sign = 1, mul = 1;
+      if ((dividend > 0 && divisor < 0) || (dividend < 0 && divisor > 0)) {
+        sign = -1;
+      }
+      dividend = Math.abs(dividend);
+      divisor = Math.abs(divisor);
+
+      divisor2 = divisor;
+
+      // 与下面的算法一致，只是为了加快运算速度，使除数成倍的增加，防止运算时间超出限制
+      while (dividend >= divisor2) {
+        if (dividend > (divisor2 + divisor2)) {
+          divisor2 += divisor2;
+          mul += mul;
+        }
+        dividend -= divisor2;
+        result += mul;
+      }
+      
+      // 当被除数大于除数的时候，减去除数，count++，直到被除数小于除数的时候，输出count
+      while (dividend >= divisor) {
+        dividend -= divisor;
+        result += 1;
+      }
+
+      if (sign == 1 && result > (Math.pow(2, 31) - 1)) {
+        return Math.pow(2, 31) - 1;
+      } else if (sign == -1 && result < -Math.pow(2, 31)) {
+        return -Math.pow(2, 31);
+      }
+      if (sign == 1) {
+        return result;
+      } else {
+        return -result;
+      }
+    };
+    const dividend = 10, divisor = 3
+    console.log(divide(dividend, divisor))
+  </script>
+
+</body>
+</html>
