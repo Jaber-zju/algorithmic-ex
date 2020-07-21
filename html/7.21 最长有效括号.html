@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>最长有效括号</title>
+</head>
+<body>
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/longest-valid-parentheses/
+
+  /**
+   * @param {string} s
+   * @return {number}
+   */
+  const longestValidParentheses = function (s) {
+    let res = 0
+    const len = s.length
+    let str = []
+    str.push(-1)
+    // debugger
+    for (let i = 0; i < len; ++i) {
+      if (s[i] === '(') {
+        str.push(i)
+      } else {
+        str.pop()
+        if (str.length === 0) {
+          str.push(i)
+        } else {
+          res = Math.max(res, i - str[str.length - 1])
+        }
+      }
+    }
+    return res
+  }
+
+  const s = ")()())"
+  // const s = "()(()"
+  // const s = "(()"
+  console.log(longestValidParentheses(s))
+
+</script>
+
+</body>
+</html>
