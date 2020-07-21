@@ -18,6 +18,8 @@
     for (let i = 1; i < n; i++) {
       // 利用正则表达式匹配字符串：1出现0次或多次
       // 匹配结果为返回数组，数组里面都是字符串
+      // 在线正则匹配查询：http://c.runoob.com/front-end/854
+      // 在线正则匹配查询：https://rubular.com/r/6LaKfy40eXTfpg
       prev = prev.replace(/(\d)\1*/g, item => `${item.length}${item[0]}`)
     }
     return prev
