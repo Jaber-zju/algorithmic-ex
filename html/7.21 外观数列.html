@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>外观数列</title>
+</head>
+<body>
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/count-and-say/
+
+  /**
+   * @param {number} n
+   * @return {string}
+   */
+  const countAndSay = function(n) {
+    // 方案一 正则表达式方法
+    let prev = '1'
+    for (let i = 1; i < n; i++) {
+      // 利用正则表达式匹配字符串：1出现0次或多次
+      // 匹配结果为返回数组，数组里面都是字符串
+      prev = prev.replace(/(\d)\1*/g, item => `${item.length}${item[0]}`)
+    }
+    return prev
+  }
+
+  const n = 4
+  console.log(countAndSay(n))
+
+</script>
+
+</body>
+</html>
