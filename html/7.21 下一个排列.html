@@ -12,39 +12,48 @@
      * @return {void} Do not return anything, modify nums in-place instead.
      */
     const nextPermutation = function(nums) {
+      // 交换指定位置的两个数，下标不变
       function swap(i, j) {
-        let temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
+        let temp = nums[i]
+        nums[i] = nums[j]
+        nums[j] = temp
       };
 
+      // 当下标i小于下标j的时候，交换这两个位置的数，并且下标变化
       function reverse(i, j) {
         while(i < j) {
-          swap(i, j);
-          i++;
-          j--;
+          swap(i, j)
+          i++
+          j--
         }
       }
-
+      
+      // 如果数组长度不大于1，则直接返回这个数组
       if (nums.length <= 1) return nums
-      let i = nums.length - 1;
+      
+      let i = nums.length - 1
+      
+      // 当前一个数大于后一个数的时候，i记录前一个数的位置
       while(i > 0) {
         if (nums[i-1] < nums[i]) {
-          break;
+          break
         }
-        i--;
+        i--
       }
-      let j = 0;
+      let j = 0
       if (i > 0) {
-        j = i + 1;
+        j = i + 1
+        // 当i右边的数 > 左边的数时，右边下标增加
         while(nums[j] > nums[i-1]) {
-          j++;
+          j++
         }
-        swap(i-1, j-1);
+        // 交换位置i左右的两个数
+        swap(i-1, j-1)
       }
-      reverse(i, nums.length - 1);
+      reverse(i, nums.length - 1)
       return nums
     }
+    
     const nums = [1,2,3]
     console.log(nextPermutation(nums))
   </script>
