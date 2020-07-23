@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>字符串相乘</title>
+</head>
+<body>
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/multiply-strings/
+  /**
+   * @param {string} num1
+   * @param {string} num2
+   * @return {string}
+   */
+  const multiply = function (num1, num2) {
+    // 方法一
+    let l1 = num1.length;
+    let l2 = num2.length;
+    if (l1 == 0 || l2 == 0) {
+      return "";
+    }
+    let rel = new Array();
+    for (let i = 0; i < l1 + l2; i++) {   // rel 是存储的字符串数组
+      rel.push(0);
+    }
+
+    for (let j = l1 - 1; j >= 0; j--) {
+      let add = 0;
+      for (let k = l2 - 1; k >= 0; k--) {   // -'0'隐式转为数值
+        let mul = (num1[j] - '0') * (num2[k] - '0');
+        let sum = rel[j + k + 1] + mul % 10 - '0' + add;
+        rel[j + k + 1] = sum % 10;
+
+        add = parseInt(mul / 10) + parseInt(sum / 10);
+      }
+      rel[j] += add;
+    }
+    for (let p = 0; p < l1 + l2; p++) {
+      if (rel[p] != 0)
+        return rel.slice(p).join("");
+    }
+    return "0";
+
+    // 方法二
+    if (num1.charAt(0) == 0 || num2.charAt(0) == 0) {
+      return "0";
+    }
+    let a, b, c, l = 0
+    if (num1.length >= num2.length) {
+      a = num1.split("");
+      b = num2.split("")
+    } else {
+      b = num1.split("");
+      a = num2.split("")
+    }
+    c = [];
+    for (k = 0; k < a.length + b.length; k++) {
+      c[k] = 0;
+    }
+    a = a.reverse();
+    b = b.reverse();
+    for (i = 0; i < a.length; i++) {
+      for (j = 0; j < b.length; j++) {
+        c[j + i] += a[i] * b[j];
+      }
+
+    }
+    for (m = 0; m < c.length; m++) {
+      if (c[m] > 9) {
+        c[m + 1] += Math.floor(c[m] / 10);
+        c[m] %= 10;
+      }
+    }
+    c = c.reverse();
+    for (n = 0; n < 1; n++) {
+      if (c[0] == 0) {
+        c.splice(0, 1);
+        n--
+      }
+      return c.join("")
+    }
+  };
+
+  const num1 = 123456789, num2 = 987654321
+  console.log(multiply(num1, num2))
+
+</script>
+
+</body>
+</html>
