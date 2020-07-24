@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>通配符匹配</title>
+</head>
+<body>
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/wildcard-matching/
+
+  /**
+   * @param {string} s
+   * @param {string} p
+   * @return {boolean}
+   */
+  const isMatch = function (s, p) {
+    // 自己的方法，无法通过
+    // const reg = /\*/g
+    // const reg2 = /\?/g
+    // const len = Math.max(s.length, p.length)
+    // if (!s.match(reg) && !p.match(reg)) {
+    //   // if (s.length !== p.length) return false
+    //   // for (let i = 0; i < len; i++) {
+    //   //   if (s[i].search(reg2) !== -1 || p[i].search(reg2) !== -1) {
+    //   //     if (s[i-1] !== p[i-1] && s[i+1] !== p[i+1]) return false
+    //   //   }
+    //   // }
+    // } else if (s.match(reg) || p.match(reg)) {
+    //
+    // }
+    // return true
+
+    // 方法一
+    let i = 0, j = 0, i1 = -1, j1 = -1, n1 = s.length, n2 = p.length
+    while (i < n1) {
+      // 如果有 ？或者两个位置上的元素相等，则继续往后推移
+      if (j < n2 && (p[j] === '?' || s[i] === p[j])) {
+        i++
+        j++
+      } else if (j < n2 && p[j] === '*') {
+        i1 = i
+        j1 = j++
+      } else if (i1 !== -1) {
+        i = ++i1
+        j = j1 + 1
+      } else
+        return false
+    }
+    while (j < n2 && p[j] === '*')
+      j++
+    return j === n2
+
+    // 方法二
+    // 构造 dp 函数
+    let dp = []
+    for (let i = 0; i <= s.length; i++) {
+      let child = []
+      for (let j = 0; j <= p.length; j++) {
+        child.push(false)
+      }
+      dp.push(child)
+    }
+    dp[s.length][p.length] = true
+    // 执行
+    for (let i = p.length - 1; i >= 0; i--) {
+      if (p[i] != "*") break
+      else dp[s.length][i] = true
+    }
+
+    for (let i = s.length - 1; i >= 0; i--) {
+      for (let j = p.length - 1; j >= 0; j--) {
+        if (s[i] == p[j] || p[j] == "?") {
+          dp[i][j] = dp[i + 1][j + 1]
+        } else if (p[j] == "*") {
+          dp[i][j] = dp[i + 1][j] || dp[i][j + 1]
+        } else {
+          dp[i][j] = false
+        }
+      }
+    }
+    return dp[0][0]
+  };
+  const s = 'adceb'
+  const p = '*a*b'
+  console.log(isMatch(s, p))
+
+</script>
+
+</body>
+</html>
