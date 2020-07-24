@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>跳跃游戏 II</title>
+</head>
+<body>
+<script type="text/javascript">
+  // 题目链接：https://github.com/Jaber-zju/algorithmic-ex/tree/excise/html
+
+  /**
+   * @param {number[]} nums
+   * @return {number}
+   */
+  const jump = function (nums) {
+    // 方法一
+    // 思路：首先让target为数组的最后一位下标值，遍历数组元素，当数组元素+其下标值 >= target时，说明可以跳完，
+    //      设置此时元素的下标值为target，step++，退出当前的遍历，重新遍历，遍历终点为target
+    //      最后，返回step
+    /*const len = nums.length
+    let target = len - 1
+    let step = 0
+    // 当目标值不为0时，说明未跳完
+    while (target !== 0) {
+      for (let i = 0; i <= target; i++) {
+        if (nums[i] + i >= target) {
+          target = i
+          step++
+          break
+        }
+      }
+    }
+    return step*/
+
+    // 方法二：贪心算法
+    // 思路：
+    let target = nums.length - 1;
+    let step = 0;
+    let index = 0;
+    while (index < target && index + nums[index] < target) {
+      let max = index + 1; // 下一步到的位置可以到达的最远位置
+      let maxI = index + 1; // 当前找到的可以在下一步跳的更远的位置
+      step++;
+      for (let i = 1; i <= nums[index]; i++) {
+        if (index + i + nums[index + i] > max) { // 找到可以跳的更远的位置
+          max = index + i + nums[index + i];
+          maxI = index + i;
+        }
+      }
+      index = maxI;
+    }
+    if (index < target)
+      step++;
+    return step;
+  };
+
+  const nums = [2, 3, 1, 1, 4]
+  console.log(jump(nums))
+</script>
+
+</body>
+</html>
