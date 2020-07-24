@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>跳跃游戏 I</title>
+</head>
+<body>
+<script type="text/javascript">
+  // 题目链接：https://blog.csdn.net/zjw_python/article/details/106697648
+
+  /**
+   * @param {number[]} nums
+   * @return {number}
+   */
+  const canJump = function (nums) {
+    // 方法一
+    // let target = nums.length - 1
+    // let count = 0
+    // while (target !== 0) {
+    //   for (let i = 0; i < target; i++) {
+    //     if (i + nums[i] >= target) {
+    //       target = i
+    //     }
+    //     count++
+    //   }
+    //   if (count > nums.length) return false
+    // }
+    // return true
+
+    // 方法二
+    if (nums.length <= 1) return true
+    let target = nums.length - 1
+    let max = 0
+    for (let i = 0; i < nums.length; i++) {
+      if (i > max) return false
+      let sum = i + nums[i]
+      if (sum >= target) return true
+      if (sum > max) max = sum
+    }
+    return false
+  };
+
+  const nums = [2, 3, 0, 1, 4]
+  console.log(canJump(nums))
+</script>
+
+</body>
+</html>
