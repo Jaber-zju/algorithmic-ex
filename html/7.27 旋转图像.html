@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>旋转图像</title>
+</head>
+<body>
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/rotate-image/
+  /**
+   * @param {number[][]} matrix
+   * @return {void} Do not return anything, modify matrix in-place instead.
+   */
+  const rotate = function(matrix) {
+    // 方法一：借用新的数组，不复合题目要求
+    /*let column = []
+    matrix.forEach(() => column.push([]))
+    
+    matrix.forEach((arr, index) => {
+      arr.forEach((item, i) => {
+        column[i].unshift(item)
+      })
+    })
+    matrix = []
+    matrix.push(...column)
+    return matrix*/
+    
+    // 方法二：直接在原数组上面进行修改
+    matrix.reverse()
+    for (let i = 0; i < matrix.length; i++) {
+      for (let j = i + 1; j < matrix[0].length; j++) {
+        let tmp = matrix[i][j]
+        matrix[i][j] = matrix[j][i]
+        matrix[j][i] = tmp
+      }
+    }
+    return matrix
+  };
+  
+  const matrix = [
+    [1,2,3],
+    [4,5,6],
+    [7,8,9]
+  ]
+  console.log(rotate(matrix))
+
+</script>
+
+</body>
+</html>
