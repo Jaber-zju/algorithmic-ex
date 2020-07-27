@@ -6,7 +6,7 @@
 </head>
 <body>
 <script type="text/javascript">
-  //题目链接：https://leetcode-cn.com/problems/permutations/
+  //题目链接：https://leetcode-cn.com/problems/permutes/
 
   /**
    * @param {number[]} nums
@@ -14,7 +14,7 @@
    */
   
   // 方法一
-  // const Permutation = function (nums) {
+  // const permute = function (nums) {
   //   result = []
   //   nums.sort(function (a, b) {
   //     return a - b
@@ -40,30 +40,29 @@
   
   // 方法二
   let swap = function(nums, i, j) {
-    let tmp = nums[i];
-    nums[i] = nums[j];
-    nums[j]  = tmp;
+    let tmp = nums[i]
+    nums[i] = nums[j]
+    nums[j]  = tmp
   }
 
   let dfs = function(result, nums, start) {
     //出口条件
     if (start === nums.length) {
-      result.push([...nums]);
+      result.push([...nums])
     }
 
     for (let i = start; i < nums.length; i++) {
-      swap(nums, start, i); //剩余数组中的元素，分别于剩余数组中第一个元素，交换，那么剩下的进行递归的全排列； 剩余数组会逐渐减小至没有
-      dfs(result, nums, start + 1);
-      //交换回来，因为在dfs嵌套中，序列是被改变了的，所以，在返回到外一层嵌套的时候，需要将数组复位
-      swap(nums, start, i);
-
+      swap(nums, start, i)  // 剩余数组中的元素，分别于剩余数组中第一个元素，交换，那么剩下的进行递归的全排列； 剩余数组会逐渐减小至没有
+      dfs(result, nums, start + 1)
+      // 交换回来，因为在dfs嵌套中，序列是被改变了的，所以，在返回到外一层嵌套的时候，需要将数组复位
+      swap(nums, start, i)
     }
   }
 
   const permute = function(nums) {
-    let result = [];
-    dfs(result, nums, 0);
-    return result;
+    let result = []
+    dfs(result, nums, 0)
+    return result
   }
 
   const nums = [1, 2, 3]

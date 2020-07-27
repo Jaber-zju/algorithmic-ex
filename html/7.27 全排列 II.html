@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>全排列 II</title>
+</head>
+<body>
+<script type="text/javascript">
+  //题目链接：https://leetcode-cn.com/problems/permutations-ii/
+
+  /**
+   * @param {number[]} nums
+   * @return {number[][]}
+   */
+
+    // 方法一
+    // const permute = function (nums) {
+    //   result = []
+    //   nums.sort(function (a, b) {
+    //     return a - b
+    //   })
+    //   find(nums, [])
+    //   return result
+    // }
+    //
+    // let result = []
+    //
+    // function find(nums, templateList) {
+    //   if (nums.length === 0) {
+    //     result.push(templateList.slice())
+    //   }
+    //   for (let i = 0; i < nums.length; i++) {
+    //     templateList.push(nums[i])
+    //     let copy = nums.slice()
+    //     copy.splice(i, 1)
+    //     find(copy, templateList)
+    //     templateList.pop()
+    //   }
+    // }
+
+    // 方法二
+  let swap = function(nums, i, j) {
+      let tmp = nums[i]
+      nums[i] = nums[j]
+      nums[j]  = tmp
+    }
+
+  let dfs = function(result, nums, start) {
+    //出口条件
+    if (start === nums.length) {
+      result.push([...nums])
+    } else {
+      for (let i = start; i < nums.length; i++) {
+        if (quChong(nums, start, i)) continue
+        swap(nums, start, i)  // 剩余数组中的元素，分别于剩余数组中第一个元素，交换，那么剩下的进行递归的全排列； 剩余数组会逐渐减小至没有
+        dfs(result, nums, start + 1)
+        // 交换回来，因为在dfs嵌套中，序列是被改变了的，所以，在返回到外一层嵌套的时候，需要将数组复位
+        swap(nums, start, i)
+      }
+    }
+  }
+  
+  // 去重
+  const quChong = (nums, i, j) => {
+    for(let k = i; k < j; k++) {
+      if(nums[j] === nums[k]) return true
+      return false
+    }
+  }
+
+  const permute = function(nums) {
+    let result = []
+    nums.sort((a, b) => a - b)
+    dfs(result, nums, 0)
+    return result
+  }
+
+  const nums = [1, 1, 2]
+  console.log(permute(nums))
+
+</script>
+
+</body>
+</html>
