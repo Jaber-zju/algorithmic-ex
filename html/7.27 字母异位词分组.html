@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>字母异位词分组</title>
+</head>
+<body>
+<script type="text/javascript">
+  // 题目链接：https://leetres-cn.com/problems/group-anagrams/
+
+  /**
+   * @param {string[]} strs
+   * @return {string[][]}
+   */
+  const groupAnagrams = function(strs) {
+    // 方法一
+    let res = []
+    let total = []
+    strs.forEach(str => {
+      let sum = 0
+      for (let i = 0; i < str.length; i++) {
+        sum += str.charCodeAt(i)
+      }
+      // let index = total.findIndex(item => item === sum)
+      let index = total.indexOf(sum)
+      if (index === -1) {
+        total.push(sum)
+        res.push([str])
+      } else {
+        res[index].push(str)
+      }
+    })
+
+    // 无法去除多余数组
+    const lenArr = res.filter((item, index) => item.length > 1)
+    lenArr.forEach(arr => {
+      arr.forEach(item => item.split('').sort((a, b) => a - b).join(''))
+      console.log(arr)
+      arr.forEach((item, index, array) => {
+        if (array.indexOf(item) === index) {
+          res.push([item])
+        }
+      })
+    })
+
+    return res
+
+    // 方法二
+    /*let newStrs = strs.map(item=>{ return item.split('').sort().join('')})
+    let hash = {};
+    for(let i = 0, len = newStrs.length; i < len; i++) {
+      if(!hash[newStrs[i]]) {
+        hash[newStrs[i]] = [];
+        hash[newStrs[i]].push(i);
+      } else {
+        hash[newStrs[i]].push(i);
+      }
+    }
+    let newArr = [];
+    Object.keys(hash).forEach(item=>{
+      let arrItem = [];
+      for(let j = 0; j < hash[item].length; j++) {
+        arrItem.push(strs[hash[item][j]])
+      }
+      newArr.push(arrItem)
+    })
+    return newArr;*/
+  };
+
+  // const strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+  const strs = ["uhd", "cab","tin","pew","duh","may","ill","buy","bar","max","doc"]
+  console.log(groupAnagrams(strs))
+
+</script>
+
+</body>
+</html>
