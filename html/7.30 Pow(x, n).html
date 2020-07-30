@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>手动实现Pow(x, n)</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/powx-n/
+
+  /**
+   * @param {number} x
+   * @param {number} n
+   * @return {number}
+   */
+  const myPow = function(x, n) {
+    let res = 1
+    // 判断x是否满足取值条件
+    if (x <= -100 || x >= 100) return false
+
+    // x=0/x=1的情况
+    if (x === 0) return 0
+    else if (x === 1) return 1.0
+    else if (x === -1) {
+      if (n % 2 === 1) return -1
+      else return 1.0
+    }
+
+    // 判断n是否满足取值条件
+    if (n >= (Math.pow(2, 31) - 1)) {
+      // return Math.pow(2, 31) - 1;
+      return false
+    } else if (n <= -Math.pow(2, 31)) {
+      // return -Math.pow(2, 31);
+      return false
+    }
+
+    // n取不同的值时，pow结果的算法不一样
+    if (n > 0) {
+      for (let i = 0; i < n; i++) {
+        res = res * x
+      }
+    } else if (n === 0) {
+      res = 1
+    } else {
+      for (let i = 0; i < -n; i++) {
+        res = res / x
+      }
+    }
+
+    // 结果保留五位小数
+    return res.toFixed(5)
+  };
+  const x = 8, n = 2
+  console.log(myPow(x, n))
+
+</script>
+</body>
+</html>
