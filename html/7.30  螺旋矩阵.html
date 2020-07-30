@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>54.螺旋矩阵</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/spiral-matrix/
+
+  /**
+   * @param {number[][]} matrix
+   * @return {number[]}
+   */
+  const spiralOrder = function(matrix) {
+    // 最终返回的结果数组
+    let ans = []
+
+    // 创建单层循环函数
+    let spiralLoop = function() {
+      // 临时数组
+      let arr = []
+      for (let i = 0; i < matrix.length; i++) {
+        // 矩阵的第一个数组元素顺序不变的添加到临时数组中，在输出结果中也是第一位
+        if (i === 0) {
+          arr = arr.concat(matrix[0])
+        }
+
+        if (i > 0 && i < matrix.length - 1) {
+          let insertRight = matrix[0].length === 1 ?
+            [] :
+            arr.splice(-(i - 1), i - 1), // 插入位置右侧的元素
+            last = matrix[i].splice(-1, 1), // 数组尾元素
+            first = matrix[i].splice(0, 1); // 数组首元素
+          // 在指定位置插入元素
+          arr = arr.concat(last, first, insertRight);
+        }
+
+        if (matrix.length > 1 && i === matrix.length - 1) {
+          let insertRight  = matrix[0].length === 1 ?
+            [] :
+            arr.splice(-(matrix.length - 2), matrix.length - 2);
+          // 将最后一行倒叙排列然后插入指定位置
+          arr = arr.concat(matrix[matrix.length - 1].reverse(), insertRight);
+        }
+      }
+      // 删除矩阵的首尾行，得到的就是下一次需要遍历的矩阵
+      matrix.splice(0, 1);
+      matrix.splice(-1, 1);
+
+      ans = ans.concat(arr);
+      // 根据矩阵内是否还存在数组进行递归
+      if (matrix.length >= 1) {
+        spiralLoop(matrix);
+      }
+    }
+    spiralLoop(matrix);
+    return ans;
+  };
+
+  const matrix = [
+    [ 1, 2, 3 ],
+    [ 4, 5, 6 ],
+    [ 7, 8, 9 ]
+  ]
+  console.log(spiralOrder(matrix))
+</script>
+</body>
+</html>
