@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>最大子序和</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/maximum-subarray/
+
+  /**
+   * @param {number[]} nums
+   * @return {number}
+   */
+  const maxSubArray = function (nums) {
+    // 方法一：数组比较小时可以通过，但数组元素很多时，会导致内存不足
+    /*let max = -Math.pow(2, 31)
+    let res = 0
+    let arr = []
+    let resArr = []
+    if (nums.length === 1) return nums[0]
+    for (let i = 0; i < nums.length; i++) {
+      for (let j = 1; j <= nums.length-i; j++) {
+        // console.log(nums.slice(i, i+j))
+        arr.push(nums.slice(i, i+j))
+      }
+      arr.forEach(arrItem => {
+        arrItem.forEach(item => res += item)
+        resArr.push(res)
+        res = 0
+      })
+      // console.log(Math.max(...resArr))
+      if (Math.max(...resArr) >= max) {
+        max = Math.max(...resArr)
+      }
+      arr = []
+      resArr = []
+    }
+    return max*/
+
+    // 方法二：通过
+    //首先判断nums是否非空
+    if (nums) {
+      //初始化最大和sum、当前和currSum
+      let sum = nums[0]
+      let currSum = nums[0]
+      for (let i = 1; i < nums.length; i++) {
+        //取得当前和currSum
+        // 负数+任何数都会使那个数变小，所以将currSum设为那个数, 即currSum + nums[i] < nums[i]
+        // 整数+任何数都会使那个数变大，所以不再考虑那个数单独成和时的大小，即currSum + nums[i] > nums[i]
+        currSum = currSum < 0 ? nums[i] : currSum + nums[i]
+        //取得最大和sum
+        sum = Math.max(currSum, sum)
+      }
+      return sum
+    }
+  }
+
+  const nums = [-2, -3]
+  console.log(maxSubArray(nums))
+
+</script>
+</body>
+</html>

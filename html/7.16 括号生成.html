@@ -25,7 +25,7 @@
      * @param {string[]} result 结果数组
      * @return {null}
      */
-    
+
     const dfs = (left, right, str, result) => {
       if (left > right) return        // 若剩下的左括号大于右括号，说明括号不匹配，什么都不做。
       if (left === 0 && right === 0) result.push(str);  // 左右括号都使用完，将括号字符串加入结果数组中
@@ -36,6 +36,7 @@
     }
 
     const n = 3
+    const a = 6
     console.log(generateParenthesis(n))
   </script>
 
