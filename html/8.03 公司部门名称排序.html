@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>部门公司名称</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://www.nowcoder.com/question/next?pid=24568059&qid=1022703&tid=35411140
+
+  /**
+   * Convert the department list to preorder traversal of the department tree
+   * @param departments string字符串二维数组 [["id1", "parentId", "name"]...], there's only one root department with empty parent id.
+   * @return string字符串一维数组
+   */
+  function listToTree( departments ) {
+    let company = ''   // 公司名称
+    let res = []       // 部门集合数组
+    // 遍历整个二维数组
+    for (let i = 0; i < departments.length; i++) {
+      let department = departments[i]
+      // 当每个数组的第一个元素含有0时，说明这是个公司名称
+      if (department[0].indexOf(0) !== -1) {
+        // 数组的最后一个元素为公司名称
+        company = department[department.length-1]
+        // 跳出本次循环，不要把公司名称放入部门集合数组
+        continue
+      }
+      // 若不是公司名称，则把最后一个元素作为部门名称放入部门 集合数组
+      res.push(department[department.length-1])
+    }
+
+    // 对部门集合数组内元素按首字母的顺序进行升序排列
+    for (let i = 0; i < res.length; i++) {
+      for (let j = i+1; j < res.length; j++) {
+        let temp = ''
+        // 如果首字母的ASCII码较大，则交换位置
+        if (res[i].charCodeAt(0) > res[j].charCodeAt(0)) {
+          temp = res[i]
+          res[i] = res[j]
+          res[j] = temp
+        }
+      }
+    }
+
+    // 返回的结果为[公司名称，所有按首字母排序的部门]
+    return [company, ...res]
+  }
+  const dep = [["d1", "d0", "IT"], ["d2", "d0", "RD"], ["d0", "", "The Company"], ["d3", "d0", "HR"]]
+  console.log(listToTree(dep))
+
+  // 排序算法
+  function f(res) {
+    for (let i = 0; i < res.length; i++) {
+      for (let j = i+1; j < res.length; j++) {
+        let temp = ''
+        if (res[i] > res[j]) {
+          temp = res[i]
+          res[i] = res[j]
+          res[j] = temp
+        }
+      }
+    }
+    return res
+  }
+  const res = [2,3,4,1,0]
+  console.log(f(res))
+</script>
+</body>
+</html>
