@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>斐波那契数列</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/fei-bo-na-qi-shu-lie-lcof/
+
+  /**
+   * @param {number} n
+   * @return {number}
+   */
+  const fib = function (n) {
+    // 方法一：时间太长
+    let res = 0
+    if (n === 0) res = 0
+    else if (n === 1) res = 1
+    else res = fib(n - 2) + fib(n - 1)
+    return res
+
+    // 方法二：动态规划
+    let fb = [0, 1]
+    for (let i = 0; i < n; i++) {
+      fb[i + 2] = (fb[i + 1] + fb[i]) % 1000000007
+    }
+    return fb[n];
+  };
+
+  const n = 44
+  console.log(fib(n))
+
+</script>
+</body>
+</html>
