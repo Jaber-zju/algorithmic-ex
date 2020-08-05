@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>数组中重复的数字</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/
+
+  /**
+   * @param {number[]} nums
+   * @return {number}
+   */
+  const findRepeatNumber = function(nums) {
+    let arr = []
+    for (let i = 0; i < nums.length; i++) {
+      if (arr.indexOf(nums[i]) === -1) {
+        arr.push(nums[i])
+      } else {
+        return nums[i]
+      }
+    }
+  };
+
+  const  nums = [2, 3, 1, 0, 2, 5, 3]
+  console.log(findRepeatNumber(nums))
+
+</script>
+</body>
+</html>
