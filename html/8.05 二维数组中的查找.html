@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>二维数组中的查找</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/
+
+  /**
+   * @param {number[][]} matrix
+   * @param {number} target
+   * @return {boolean}
+   */
+  const findNumberIn2DArray = function(matrix, target) {
+    if (matrix.length === 0) return false
+    let rowLen = matrix[0].length
+    for (let i = 0; i < matrix.length; i++) {
+      let item = matrix[i]
+      if (target > item[rowLen-1]) continue
+      else {
+        for (let j = 0; j < rowLen; j++) {
+          if (item[j] === target) return true
+        }
+      }
+    }
+    return false
+  };
+
+  const matrix = [
+    [1,   4,  7, 11, 15],
+    [2,   5,  8, 12, 19],
+    [3,   6,  9, 16, 22],
+    [10, 13, 14, 17, 24],
+    [18, 21, 23, 26, 30]
+  ]
+  const target = 20
+  console.log(findNumberIn2DArray(matrix, target))
+</script>
+</body>
+</html>
