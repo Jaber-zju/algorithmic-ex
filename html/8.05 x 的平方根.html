@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>x的平方根</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/sqrtx/
+
+  /**
+   * @param {number} x
+   * @return {number}
+   */
+  const mySqrt = function(x) {
+    let res = Math.pow(x, 1/2)
+    return Math.floor(res)
+  };
+
+  const x = 8
+  console.log(mySqrt(x))
+
+</script>
+</body>
+</html>
