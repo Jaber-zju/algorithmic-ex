@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>数组中出现次数超过一半的数字</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/
+
+  /**
+   * @param {number[]} nums
+   * @return {number}
+   */
+  const majorityElement = function (nums) {
+    /*方法一：暴力破解法*/
+    // 如果长度为1，则直接输出数组元素
+    if (nums.length === 1) return nums[0]
+    let arr = []
+    let arrLen = []
+    // 记录数组的长度
+    const len = nums.length
+    // 获取所有的重复元素，并排序
+    arr = nums.filter((item, index, arr) => arr.indexOf(item) !== index)
+    arr.sort()
+
+    // 对重复元素进行筛选，得到非重复元素的下标索引值
+    arr.forEach((item, index, arr) => {
+      if (arr.indexOf(item) === index) arrLen.push(index)
+    })
+    // 将重复元素数组长度作为下标索引值的末尾元素
+    arrLen.push(arr.length)
+
+    // 下标索引值数组中相邻元素之间的差值+1 即为前一个元素重复的次数，判断其是否大于数组长度的一半即可
+    for (let i = 1; i < arrLen.length; i++) {
+      // 若大于一半，返回前一个元素
+      if (arrLen[i] - arrLen[i - 1] + 1 > len / 2) return arr[arrLen[i - 1]]
+    }
+
+
+    /*方法二：按位取反*/
+    return nums.sort(((a, b) => a - b))[~~(nums.length / 2)]
+
+    /*方法三：用到map*/
+    // 如果数组为空或者不存在，则输出0
+    if (!nums || nums.length === 0) {
+      return 0
+    }
+
+    // 如果数组长度为1或者2，则输出第一个元素或者第二个元素
+    if (nums.length <= 2) {
+      return nums[0] || nums[nums.length - 1]
+    }
+
+    // 设置数组长度的一半为常量
+    const length = nums.length / 2
+
+    // 新建map
+    const map = new Map()
+
+    // 创建map，里面存储的是 数字--出现次数 的键值对
+    for (const items of nums) {
+      // 如果数字出现次数为0或不存在，则设置出现次数为1，否则，将原本的出现次数+1
+      let count = map.get(items)
+      map.set(items, count > 0 ? ++count : 1)
+      // 如果出现次数满足条件，返回数字
+      if (count >= length) {
+        return items
+      }
+    }
+  }
+
+  const nums = [2, 2, 1, 1, 1, 2, 2]
+  console.log(majorityElement(nums))
+
+</script>
+</body>
+</html>
