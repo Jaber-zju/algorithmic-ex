@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>复杂链表的复制</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/fu-za-lian-biao-de-fu-zhi-lcof/
+
+  /**
+   * // Definition for a Node.
+   * function Node(val, next, random) {
+   *    this.val = val;
+   *    this.next = next;
+   *    this.random = random;
+   * };
+   */
+
+  /**
+   * @param {Node} head
+   * @return {Node}
+   */
+  const copyRandomList = function (head) {
+    // 方法一
+    // 如果head为空，则返回[]
+    if (head == null) return head
+    let map = new Map(), curr = head
+
+    while (curr) {
+      // 复制链表中的每个节点并创建对应的新节点
+      let newNode = new Node(curr.val)
+      // 在Map中存储<原始节点，新节点>这样的键值对
+      map.set(curr, newNode)
+      // next指针指向下一个节点
+      curr = curr.next
+    }
+    ;
+
+    // 重新将head赋值
+    curr = head;
+    while (curr) {
+      // 从map中获取原始节点对应的新节点值
+      let newNode = map.get(curr)
+      // 再获取它的next节点和random节点对应的新节点，如果它们不为空，再把它们和新节点连接到一起
+      let next = map.get(curr.next)
+      let random = map.get(curr.random)
+      if (next) newNode.next = next
+      if (random) newNode.random = random
+      curr = curr.next
+    }
+    return map.get(head)
+
+
+    // 方法二
+    if (!head) return null
+    let cur = head, preHead = new Node(), temp = preHead, map = new Map();
+    while (cur) {
+      temp.val = cur.val
+      temp.next = cur.next ? new Node() : null
+      map.set(cur, temp)  // 把temp的在值存起来
+      temp = temp.next
+      cur = cur.next
+    }
+    temp = preHead;
+    while (head) {
+      // 通过引用地址找到对应的链表节点
+      temp.random = head.random ? map.get(head.random) : null
+      head = head.next
+      temp = temp.next
+    }
+    return preHead
+  }
+
+  const head = [[3, null], [3, 0], [3, null]]
+  console.log(copyRandomList(head))
+
+</script>
+</body>
+</html>
