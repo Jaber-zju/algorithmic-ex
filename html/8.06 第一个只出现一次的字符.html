@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>第一个只出现一次的字符</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/di-yi-ge-zhi-chu-xian-yi-ci-de-zi-fu-lcof/
+
+  /**
+   * @param {string} s
+   * @return {character}
+   */
+  const firstUniqChar = function(s) {
+    if (!s) return " "
+    for (let i = 0; i < s.length; i++) {
+      if (s.indexOf(s[i]) === i && s.lastIndexOf(s[i]) === i) return s[i]
+    }
+    return " "
+  };
+  const  s = "abaccdeff"
+  console.log(firstUniqChar(s))
+
+</script>
+</body>
+</html>
