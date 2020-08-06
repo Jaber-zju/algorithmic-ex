@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>旋转数组的最小数字</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/xuan-zhuan-shu-zu-de-zui-xiao-shu-zi-lcof/
+
+  /**
+   * @param {number[]} numbers
+   * @return {number}
+   */
+  const minArray = function(numbers) {
+    // 方法一
+    // return Math.min.apply(Math, numbers)
+
+    // 方法二
+    // return Math.min.call(Math, ...numbers)
+
+    // 方法三
+    return Math.min(...numbers)
+
+    // 方法四：用for循环寻找最小值
+
+    // 方法五：对数组进行排序，找末尾元素或开头元素
+  };
+  const numbers = [3,4,5,1,2]
+  console.log(minArray(numbers))
+
+</script>
+</body>
+</html>
