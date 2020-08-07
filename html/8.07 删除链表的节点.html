@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>删除链表的节点</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/shan-chu-lian-biao-de-jie-dian-lcof/
+
+  /**
+   * Definition for singly-linked list.
+   * function ListNode(val) {
+   *     this.val = val;
+   *     this.next = null;
+   * }
+   */
+  /**
+   * @param {ListNode} head
+   * @param {number} val
+   * @return {ListNode}
+   */
+  const deleteNode = function (head, val) {
+    // 方法一：双指针法
+    // 一个指针指向当前节点，另一个指针指向下一个节点
+    let cur = head
+    let pre = cur.next
+
+    while (cur) {
+      // 如果当前节点就是要删除的那个节点，则将当前节点置为null，返回pre,即指针移到下一个节点
+      if (cur.val === val) {
+        cur = null
+        return pre
+        // 如果下一个节点就是要删除的那个节点，则cur.next = pre.next，返回head
+      } else if (pre.val === val) {
+        cur.next = pre.next
+        return head
+      } else {
+        // 如果都不是，则把这两个指针往后移一位，再次循环查找
+        cur = pre
+        pre = pre.next
+      }
+    }
+    return head
+
+
+    // 方法二：递归
+    // 每次都判断是否是头节点，如果是，直接返回后面的节点，如果不是，则将后面的节点代入，递归调用
+    if (head.val === val) {
+      return head.next
+    }
+    head.next = deleteNode(head.next, val);
+    return head
+
+
+    // 方法二：无法通过
+    let cur = head
+    let map = new Map()
+    while (cur) {
+      if (cur.val !== val) {
+        let newNode = new ListNode(cur.val)
+        map.set(cur, newNode)
+        cur = cur.next
+      } else {
+        let newNode = new ListNode(cur.next.val)
+        map.set(cur.next, newNode)
+        cur = cur.next.next
+      }
+    }
+    cur = head
+    while (cur) {
+      if (cur.val !== val) {
+        let newNode = map.get(cur)
+        let next = map.get(cur.next)
+        if (next) newNode.next = next
+        cur = cur.next
+      } else {
+        let newNode = map.get(cur.next)
+        let next = map.get(cur.next.next)
+        if (next) newNode.next = next
+        cur = cur.next.next
+      }
+    }
+    return map.get(head)
+
+  };
+  const head = [4, 5, 1, 9], val = 5
+  console.log(deleteNode(head, val))
+
+</script>
+</body>
+</html>
