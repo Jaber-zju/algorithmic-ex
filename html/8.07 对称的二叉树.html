@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>对称的二叉树</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/dui-cheng-de-er-cha-shu-lcof/
+
+  /**
+   * Definition for a binary tree node.
+   * function TreeNode(val) {
+   *     this.val = val;
+   *     this.left = this.right = null;
+   * }
+   */
+  /**
+   * @param {TreeNode} root
+   * @return {boolean}
+   */
+  const isSymmetric = function (root) {
+    // 方法一：一张纸对折，若完全一致，则说明是对称的
+    function isMirror(r1, r2) {
+      // 若均为空，则对称，返回true；若只有一边是空，则不对称，返回false；
+      if (!r1 && !r2) return true
+      if (!r1 || !r2) return false
+      // 如果两边均不为空，则一一对比节点的值是否相等，以及递归调用isMirror(),判断是不是对称
+      //判断根节点
+      //判断r1的左树和r2的右树
+      //判断r2的左树和r1的右树
+      return r1.val === r2.val && isMirror(r1.left, r2.right) && isMirror(r1.right, r2.left)
+    }
+
+    return isMirror(root, root)
+  };
+
+
+  // 方法二：与方法一一致
+  const isSymmetric = function (root) {
+    if (!root) return true
+    return helper(root, root)
+  };
+
+  function helper(a, b) {
+    if (a === null || b === null) return a === b
+    if (a.val !== b.val) return false
+    return helper(a.left, b.right) && helper(a.right, b.left)
+  }
+
+  const root = [1, 2, 2, 3, 4, 4, 3]
+  console.log(isSymmetric(root))
+</script>
+</body>
+</html>
