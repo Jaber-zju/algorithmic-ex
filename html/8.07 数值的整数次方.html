@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>数值的整数次方</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/
+
+  /**
+   * @param {number} x
+   * @param {number} n
+   * @return {number}
+   */
+  const myPow = function(x, n) {
+    if (!x) return 0
+    else if (!n) return 1
+    else {
+      return Math.pow(x, n).toFixed(5)
+    }
+  };
+
+  const x = 2.10000, n = 3
+  console.log(myPow(x, n))
+
+</script>
+</body>
+</html>
