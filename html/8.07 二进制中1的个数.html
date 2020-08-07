@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>二进制中1的个数</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof/
+
+  /**
+   * @param {number} n - a positive integer
+   * @return {number}
+   */
+  const hammingWeight = function(n) {
+    const a = n.toString(2)
+    let count = 0
+    for (let i = 0; i < a.length; i++) {
+      if (a[i] === '1') count++
+    }
+    return count
+  };
+
+  const  n = 9
+  console.log(hammingWeight(n))
+
+</script>
+</body>
+</html>
