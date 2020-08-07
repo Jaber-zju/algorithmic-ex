@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>从上到下打印二叉树III</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-iii-lcof/
+
+  /**
+   * Definition for a binary tree node.
+   * function TreeNode(val) {
+   *     this.val = val;
+   *     this.left = this.right = null;
+   * }
+   */
+  /**
+   * @param {TreeNode} root
+   * @return {number[][]}
+   */
+  const levelOrder = function (root) {
+    if (!root) return []
+    let res = []
+    let height = 0
+    // 主要代码，获取当前层
+    let nowLayer = [root]   //当前层
+    while (true) {
+      res[height] = []
+      let auxiliaryLayer = []  //辅助层
+      while (nowLayer.length) {
+        // 下面两行代码均是错误的，reverse()是数组的方法，树是没有的
+        // nowLayer = (height+1) % 2 ? nowLayer : nowLayer.reverse()
+        // let temNode = height % 2 === 0 ? nowLayer.shift() : nowLayer.pop()
+        let temNode = nowLayer.shift()
+        res[height].push(temNode.val)
+        temNode.left && auxiliaryLayer.push(temNode.left)
+        temNode.right && auxiliaryLayer.push(temNode.right)
+      }
+      // 当是偶数行时，反转结果
+      // 只能在这里反转，在其他地方反转都不可以，因为其他地方不是数组
+      if (height % 2) res[height].reverse()
+      height++
+      if (auxiliaryLayer.length) {
+        nowLayer = auxiliaryLayer
+      } else
+        return res
+    }
+  }
+
+  const root = [1,2,3,4,null,null,5]
+  console.log(root)
+
+</script>
+</body>
+</html>
