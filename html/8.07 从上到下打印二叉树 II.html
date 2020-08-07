@@ -28,11 +28,11 @@
     // 主要代码，获取当前层
     let nowLayer = [root]   //当前层
     while (true) {
-      res[height] = [];
+      res[height] = []
       let auxiliaryLayer = []  //辅助层
       while (nowLayer.length) {
         let temNode = nowLayer.shift()
-        res[height].push(temNode.val)
+        res[height].push(temNode?.val)
         temNode.left && auxiliaryLayer.push(temNode.left)
         temNode.right && auxiliaryLayer.push(temNode.right)
       }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>从上到下打印二叉树</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof/
+
+  /**
+   * Definition for a binary tree node.
+   * function TreeNode(val) {
+   *     this.val = val;
+   *     this.left = this.right = null;
+   * }
+   */
+  /**
+   * @param {TreeNode} root
+   * @return {number[]}
+   */
+  const levelOrder = function(root) {
+    if (!root) return []
+    let res = []
+    let nowLayer = [root]
+    while (true) {
+      let assistantLayer = []
+      while (nowLayer.length) {
+        let tempNode = nowLayer.shift()
+        res.push(tempNode?.val)
+        tempNode.left && assistantLayer.push(tempNode.left)
+        tempNode.right && assistantLayer.push(tempNode.right)
+      }
+      if (assistantLayer.length) nowLayer = assistantLayer
+      else return res
+    }
+  };
+
+
+</script>
+</body>
+</html>
