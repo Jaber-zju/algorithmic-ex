@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>滑动窗口的最大值</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/
+
+  /**
+   * @param {number[]} nums
+   * @param {number} k
+   * @return {number[]}
+   */
+  const maxSlidingWindow = function(nums, k) {
+    if (nums.length === 0) return []
+    else if (nums.length === 1) return nums
+    if (!k) return []
+    let start = 0
+    let end = k
+    let res = []
+    // debugger
+    for (let i = 0; i < nums.length; i++) {
+      if (start <= nums.length - k) {
+        end = start + k
+        let arr = nums.slice(start, end)
+        res.push(Math.max(...arr))
+        start++
+      } else {
+        return res
+      }
+    }
+    return res
+  };
+
+  /*function sum(arr) {
+    let he = 0
+    for (let i = 0; i<arr.length; i++) {
+      he += arr[i]
+    }
+    return he
+  }*/
+  const nums = [1, -1], k = 1
+  console.log(maxSlidingWindow(nums, k))
+
+</script>
+</body>
+</html>
