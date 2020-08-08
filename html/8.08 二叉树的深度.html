@@ -21,6 +21,7 @@
    * @return {number}
    */
   const maxDepth = function(root) {
+    // 方法一：逐层遍历
     let height = 0
     if (!root) return 0
     else {
@@ -36,6 +37,14 @@
         if (assistantLayer.length) nowLayer = assistantLayer
         else return height
       }
+    }
+
+
+
+    // 方法二：递归，推荐使用
+    if (!root) return 0
+    else {
+      return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1
     }
 
   };
