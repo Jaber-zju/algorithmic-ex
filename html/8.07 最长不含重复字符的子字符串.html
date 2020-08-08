@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>最长不含重复字符的子字符串</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/
+
+  /**
+   * @param {string} s
+   * @return {number}
+   */
+  const lengthOfLongestSubstring = function (s) {
+    // 方法一
+    // const len = s.length
+    // let res = 0
+    // let temp = ''
+    // for (let i = 0; i < len; i++) {
+    //   if (temp.indexOf(s[i]) === -1) {
+    //     temp += s[i]
+    //     res = Math.max(res, temp.length);
+    //   } else {
+    //     temp = temp.slice(temp.indexOf(s[i]) + 1)
+    //     temp += s[i]
+    //   }
+    // }
+    // return res
+
+
+    // 方法二：滑动窗口
+    let start = 0
+    let end = 1
+    let max = 1
+    let child = ''
+    let maxStr = ''
+    if (s === '') return 0
+    else if (s === ' ' || s.length === 1) return 1
+    else if (s.length === 2) {
+      if (s[0] === s[1]) return 1
+      else return 2
+    } else {
+      while (end < s.length) {
+        child = s.substring(start, end)
+        if (child.indexOf(s[end]) === -1) {
+          end++
+          if (end - start > max) {
+            max = end - start
+            // maxStr = s.substring(start, end)
+          }
+        } else {
+          start += child.indexOf(s[end]) + 1
+          end++
+        }
+      }
+    }
+    return max
+
+
+    // 方法三：滑动窗口
+    /*使用 head 指针指向位置 0，tail指针指向位置 1：
+若 s 的 head 到 tail 前的字符中存在 tail，则将 head 指针移动到该滑动窗口中重复 tail 的位置后面一位，tail 往后移动一位；
+若不存在，则 tail 往后移动一位，这里的 tail 移动后肯定比前一步 tail 移动的长度大，所以在这里设置与 max 比较。
+直到 tail 跑到 s 外面，循环结束*/
+    // let max = 1
+    // let len = s.length
+    // if (len <= 1) {
+    //   return len
+    // }
+    // let head = 0, tail = 1, index = -1
+    // while (tail < len) {
+    //   index = s.substring(head, tail).indexOf(s[tail])
+    //   if (index !== -1 && head < tail) {
+    //     head += index + 1
+    //     tail++
+    //   } else {
+    //     tail++
+    //     if (tail - head > max) max = tail - head
+    //   }
+    // }
+    // return max
+
+  };
+  const s = "abcabcbb"
+  console.log(lengthOfLongestSubstring(s))
+
+</script>
+</body>
+</html>
