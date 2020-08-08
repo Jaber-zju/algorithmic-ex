@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>数组内元素出现的次数</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 统计数组中各个元素出现的次数，并判断出现率是否大于1%，并输出大于1%的元素个数
+  const appearNums = (nums) => {
+    // 方法一:利用数组的reduce()方法
+    /*let res = 0
+    const count = nums.reduce((pre, cur) => {
+      if (cur in pre) {
+        pre[cur]++
+      } else {
+        pre[cur] = 1
+      }
+      return pre
+    }, {})
+    const arr = Object.values(count)
+    arr.forEach(item => {
+      if (item / nums.length * 100 >= 1) res++
+    })
+    return res*/
+
+
+
+    // 方法二：使用map存储键值对
+    let res = 0
+    let map = new Map()
+    nums.forEach(item => {
+      if (map.get(item)) {
+        map.set(item, map.get(item)+1)
+      } else {
+        map.set(item, 1)
+      }
+    })
+    map.forEach(item => {
+      if (item / nums.length * 100 >=1) res++
+    })
+    return res
+
+
+
+    // 方法三：利用hash存储键值对
+    let res = 0
+    let hash = {}
+    nums.forEach(item => {
+      hash[item] = hash[item] ? hash[item]+1 : 1
+    })
+    const arr = Object.values(hash)
+    arr.forEach(item => {
+      if (item / nums.length * 100 >=1) res++
+    })
+    return res
+  }
+
+  const nums = ['i', 'i', 'a', 'q', 'g']
+  console.log(appearNums(nums))
+
+</script>
+</body>
+</html>
