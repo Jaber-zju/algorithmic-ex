@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>二叉树的深度</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/er-cha-shu-de-shen-du-lcof/
+
+  /**
+   * Definition for a binary tree node.
+   * function TreeNode(val) {
+   *     this.val = val;
+   *     this.left = this.right = null;
+   * }
+   */
+  /**
+   * @param {TreeNode} root
+   * @return {number}
+   */
+  const maxDepth = function(root) {
+    let height = 0
+    if (!root) return 0
+    else {
+      let nowLayer = [root]
+      while (true) {
+        let assistantLayer = []
+        while (nowLayer.length) {
+          let tempNode = nowLayer.shift()
+          tempNode.left && assistantLayer.push(tempNode.left)
+          tempNode.right && assistantLayer.push(tempNode.right)
+        }
+        height++
+        if (assistantLayer.length) nowLayer = assistantLayer
+        else return height
+      }
+    }
+
+  };
+</script>
+</body>
+</html>
