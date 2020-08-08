@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>数组中数字出现的次数</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/
+
+  /**
+   * @param {number[]} nums
+   * @return {number[]}
+   */
+  const singleNumbers = function(nums) {
+    let res = []
+    for (let i = 0; i < nums.length; i++) {
+      if (nums.indexOf(nums[i]) === nums.lastIndexOf(nums[i])) res.push(nums[i])
+    }
+    return res
+  };
+
+</script>
+</body>
+</html>
