@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>求1+2+…+n</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/qiu-12n-lcof/
+
+  /**
+   * @param {number} n
+   * @return {number}
+   */
+  const sumNums = function(n) {
+    // 方法一：没有用循环，但是用了条件判断，不符合规则
+    // if (n === 0) {
+    //   return 0
+    // } else if (n === 1) {
+    //   return 1
+    // } else {
+    //   return n + sumNums(n-1)
+    // }
+
+
+
+    // 方法二：逻辑表达式 + 递归
+    return n && (n + sumNums(n-1))
+
+  };
+  const n = 9
+  console.log(sumNums(n))
+
+</script>
+</body>
+</html>
