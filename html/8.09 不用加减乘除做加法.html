@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>不用加减乘除做加法</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/
+
+  /**
+   * @param {number} a
+   * @param {number} b
+   * @return {number}
+   */
+  const add = function (a, b) {
+    // 方法一：判断条件多，不合适，耗时长
+    let res = []
+    // debugger
+    if (!a && !b) return 0
+    else if ((a > 0 && b > 0) || (a < 0 && b < 0)) {
+      for (let i = 0; i < Math.abs(a); i++) {
+        res.push(i)
+      }
+      for (let i = 0; i < Math.abs(b); i++) {
+        res.push(i)
+      }
+      return a > 0 ? res.length : 0 - res.length
+    } else if (a <= 0 && b >= 0) {
+      if (Math.abs(a) >= Math.abs(b)) {
+        for (let i = 0; i < Math.abs(a); i++) {
+          res.push(i)
+        }
+        for (let i = 0; i < b; i++) {
+          res.pop(i)
+        }
+        return 0 - res.length
+      } else if (Math.abs(a) < Math.abs(b)) {
+        for (let i = 0; i < Math.abs(b); i++) {
+          res.push(i)
+        }
+        for (let i = 0; i < Math.abs(a); i++) {
+          res.pop(i)
+        }
+        return res.length
+      }
+    } else if (a >= 0 && b <= 0) {
+      if (Math.abs(a) >= Math.abs(b)) {
+        for (let i = 0; i < Math.abs(a); i++) {
+          res.push(i)
+        }
+        for (let i = 0; i < b; i++) {
+          res.pop(i)
+        }
+        return res.length
+      } else if (Math.abs(a) < Math.abs(b)) {
+        for (let i = 0; i < Math.abs(b); i++) {
+          res.push(i)
+        }
+        for (let i = 0; i < Math.abs(a); i++) {
+          res.pop(i)
+        }
+        return 0 - res.length
+      }
+    }
+
+
+    // 方法二：递归 + 位运算
+    if (a === 0) return b
+    if (b === 0) return a
+    if (b !== 0) {
+      let num1 = a ^ b  //不进位
+      let num2 = (a & b) << 1 //不进位
+      return add(num1, num2)
+    }
+  }
+  const a = -2, b = -8
+  console.log(add(a, b))
+
+</script>
+</body>
+</html>
