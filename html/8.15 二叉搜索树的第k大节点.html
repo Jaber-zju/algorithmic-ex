@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>二叉搜索树的第k大节点</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-di-kda-jie-dian-lcof/
+
+  /**
+   * Definition for a binary tree node.
+   * function TreeNode(val) {
+   *     this.val = val;
+   *     this.left = this.right = null;
+   * }
+   */
+  /**
+   * @param {TreeNode} root
+   * @param {number} k
+   * @return {number}
+   */
+  const kthLargest = function (root, k) {
+    // 方法一：遍历树，将树节点放在数组中，排序后输出第K大的值
+    let nodeArr = []
+    if (!root || !k) return null
+    else {
+      let nowLayer = [root]
+      while (true) {
+        let assistant = []
+        while (nowLayer.length) {
+          let tempNode = nowLayer.shift()
+          if (tempNode.val) nodeArr.push(tempNode.val)
+          tempNode.left && assistant.push(tempNode.left)
+          tempNode.right && assistant.push(tempNode.right)
+        }
+        if (assistant.length) nowLayer = assistant
+        else {
+          tempNode.sort((a, b) => b - a)
+          return tempNode[k - 1]
+        }
+      }
+    }
+  };
+
+
+  // 方法二：逆中序遍历
+  var kthLargest = function (root, k) {
+    if (!root) return null;
+
+    let stack = [], count = 0;
+
+    while (root || stack.length) {
+      if (root) {
+        stack.push(root);
+        root = root.right;
+      } else {
+        let cur = stack.pop();
+        if (++count === k) {
+          return cur.val;
+        }
+        root = cur.left;
+      }
+    }
+    return null;
+  };
+
+
+  // 中序遍历
+  var kthLargest = function (root, k) {
+    // 中序遍历
+    let res = dfs(root, k);
+    return res.reverse()[k - 1];
+  };
+  let res = [];
+  const dfs = (root) => {
+    if (!root) return;
+    dfs(root.left);
+    res.push(root.val);
+    dfs(root.right)
+    return res;
+  }
+
+</script>
+</body>
+</html>
