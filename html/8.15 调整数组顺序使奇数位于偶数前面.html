@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>调整数组顺序使奇数位于偶数前面</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/diao-zheng-shu-zu-shun-xu-shi-qi-shu-wei-yu-ou-shu-qian-mian-lcof/
+
+  /**
+   * @param {number[]} nums
+   * @return {number[]}
+   */
+  var exchange = function(nums) {
+    let odd = []
+    let even = []
+    nums.forEach(item => {
+      if (item % 2 === 1) odd.push(item)
+      else even.push(item)
+    })
+    return odd.concat(even)
+  };
+  const nums = [1,2,3,4]
+  console.log(exchange(nums))
+</script>
+</body>
+</html>
