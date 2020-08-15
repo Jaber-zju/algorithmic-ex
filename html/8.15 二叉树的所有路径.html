@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>二叉树的所有路径</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/binary-tree-paths/
+
+  /**
+   * Definition for a binary tree node.
+   * function TreeNode(val) {
+   *     this.val = val;
+   *     this.left = this.right = null;
+   * }
+   */
+  /**
+   * @param {TreeNode} root
+   * @return {string[]}
+   */
+    // 方法一：中序遍历思路，每迭代到一个节点，将其值加入到nextLink当中，再继续迭代左右字节点
+    // 终止条件为左右字节点都为空，此时将创建好的nextLink push到数组中
+  let linkArr = [];
+
+  let binaryTreePaths = function (root) {
+    linkArr = []
+    if (root) {
+      deepRoot(root, null)
+    }
+    return linkArr;
+  };
+
+  let deepRoot = function (root, link) {
+    let nextLink = link ? link + '->' + root.val : root.val + '';
+    if (root.left === null && root.right === null) {
+      linkArr.push(nextLink)
+    } else {
+      if (root.left) {
+        deepRoot(root.left, nextLink)
+      }
+      if (root.right) {
+        deepRoot(root.right, nextLink)
+      }
+    }
+  }
+
+</script>
+</body>
+</html>
