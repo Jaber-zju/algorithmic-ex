@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>两个链表的第一个公共节点</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/liang-ge-lian-biao-de-di-yi-ge-gong-gong-jie-dian-lcof/
+
+  /**
+   * Definition for singly-linked list.
+   * function ListNode(val) {
+   *     this.val = val;
+   *     this.next = null;
+   * }
+   */
+
+  /**
+   * @param {ListNode} headA
+   * @param {ListNode} headB
+   * @return {ListNode}
+   */
+  const getIntersectionNode = function (headA, headB) {
+    // 方法一：利用链表节点的isVisited属性，先遍历第一条链表，将每个节点的isVisited属性 置为true
+    //        再遍历第二条链表，若某节点的isVisited属性为true，则该节点则是交叉节点
+    while (headA) {
+      headA.isVisited = true
+      headA = headA.next
+    }
+    while (headB) {
+      if (headB.isVisited) return headB
+      headB = headB.next
+    }
+    return null
+
+
+    // 方法二：双指针环形链表
+    if (!headA || !headB) return null
+    let pa = headA
+    let pb = headB
+
+    while (pa !== pb) {  // 两节点相等时即为交点
+      pa = pa ? pa.next : headB  // 判断是否走到链表的末尾，若到了末尾，则指向另一个链表，形成环
+      pb = pb ? pb.next : headA
+    }
+    return pa  // 两节点相等时即为交点
+  }
+
+
+  // 方法三：map
+  if (!headA || !headB) return null
+  let map = new Map()
+  while (headA) {
+    map.set(headA, true)
+    headA = headA.next
+  }
+  while (headB) {
+    if (map.get(headB)) return headB
+    else headB = headB.next
+  }
+  return null
+
+</script>
+</body>
+</html>
