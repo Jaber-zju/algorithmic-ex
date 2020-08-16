@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>左旋转字符串</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/zuo-xuan-zhuan-zi-fu-chuan-lcof/
+
+  /**
+   * @param {string} s
+   * @param {number} n
+   * @return {string}
+   */
+  const reverseLeftWords = function(s, n) {
+    if(!s.trim()) return ''
+    let left = s.substr(0, n)
+    let right = s.substring(n)
+    return right + left
+  }
+
+  const s = "abcdefg", n = 2
+  console.log(reverseLeftWords(s, n))
+</script>
+</body>
+</html>
