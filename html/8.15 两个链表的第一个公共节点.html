@@ -46,21 +46,23 @@
       pb = pb ? pb.next : headA
     }
     return pa  // 两节点相等时即为交点
+
+
+    // 方法三：map
+    if (!headA || !headB) return null
+    let map = new Map()
+    while (headA) {
+      map.set(headA, true)
+      headA = headA.next
+    }
+    while (headB) {
+      if (map.get(headB)) return headB
+      else headB = headB.next
+    }
+    return null
   }
 
 
-  // 方法三：map
-  if (!headA || !headB) return null
-  let map = new Map()
-  while (headA) {
-    map.set(headA, true)
-    headA = headA.next
-  }
-  while (headB) {
-    if (map.get(headB)) return headB
-    else headB = headB.next
-  }
-  return null
 
 </script>
 </body>
