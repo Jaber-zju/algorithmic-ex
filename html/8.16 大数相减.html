@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>大数相减</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  let subtract = function (a, b) {
+    let ltrimZero = function (str) {
+      let i = 0
+      while (i < str.length && str.charAt(i) === "0") {
+        i++
+      }
+      return str.slice(i)
+    };
+    let result = []
+    //是否有借位
+    let minusOne = 0
+    //去掉a,b开头的0
+    a = ltrimZero(a)
+    b = ltrimZero(b)
+    //补零对齐
+    while (a.length < b.length) {
+      a = "0" + a
+    }
+    while (b.length < a.length) {
+      b = "0" + b
+    }
+    //从后面位数往前相减
+    for (let i = a.length - 1; i >= 0; i--) {
+      let c1 = a.charAt(i) - 0
+      let c2 = b.charAt(i) - 0
+      //如果当前位数无须借位
+      if (c1 - minusOne >= c2) {
+        result.unshift(c1 - c2 - minusOne)
+        minusOne = 0
+      } else {
+        result.unshift(c1 + 10 - c2 - minusOne);
+        minusOne = 1
+      }
+    }
+    //如果最高位仍然要借位
+    //比如："99999" - "100000"
+    if (minusOne) {
+      //=> -(100000 - 99999) => -1
+      let newResult = subtract(b, a)
+      newResult = ltrimZero(newResult)
+      return "-" + newResult
+    }
+    result = result.join("")
+    result = ltrimZero(result)
+    return result ? result : "0"
+  };
+</script>
+</body>
+</html>
