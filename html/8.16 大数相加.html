@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>大数相加</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  function sumBigNumber(a, b) {
+    let res = '',
+      temp = 0
+    // 用字符串的形势来保存大数，就保证了其在数学表示上不会发生变化
+    a = a + ''
+    b = b + ''
+    // 将字符串变成数组，有助于后面取最后一个数运算
+    a = a.split('')
+    b = b.split('')
+
+    while (a.length || b.length || temp) {
+      temp += ~~a.pop() + ~~b.pop()
+      res = (temp % 10) + res
+      // 逢10进1
+      temp = temp > 9
+    }
+    return res.replace(/^0+/, '')
+  }
+
+  console.log(sumBigNumber('100000000000002222', '111111'))
+  console.log(sumBigNumber('3782647863278468012934670', '23784678091370408971329048718239749083'))
+</script>
+</body>
+</html>
