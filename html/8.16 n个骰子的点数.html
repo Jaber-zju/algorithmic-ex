@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  /**
+   * @param {number} n
+   * @return {number[]}
+   */
+  var twoSum = function (n) {
+    let totalArr = []
+    totalArr.push(new Array(6).fill(1 / 6))
+    for (let i = 2; i < n + 1; i++) {
+      let nowArr = new Array(i * 6 - i + 1).fill(0)
+      let nowArrmap = []
+      nowArr.forEach((item, index) => {
+        let eachVal = item
+        for (let j = 1; j <= 6; j++) {
+          if ((index + i - j) <= (i - 1) * 6 && (index + i - j) >= (i - 1)) {
+            eachVal += 1 / 6 * totalArr[i - 2][index + 1 - j]
+          } else if ((index + i - j) < (i - 1)) {
+            break
+          }
+        }
+        nowArrmap.push(eachVal)
+      })
+      totalArr.push(nowArrmap)
+    }
+    return totalArr[n - 1]
+  }
+
+</script>
+</body>
+</html>
