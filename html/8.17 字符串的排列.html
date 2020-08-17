@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>字符串的排列</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/
+
+  /**
+   * @param {string} s
+   * @return {string[]}
+   * 全排列算法:
+   *   固定位置依次递归交换位置穷举出所有的可能性。
+   */
+  var permutation = function (s) {
+    const char = s.split('')
+    const res = []
+    const dsf = function (n) {
+      // 递归的出口,如果是遍历到最后一个位置此方法就解了
+      if (n === char.length) {
+        res.push(char.join(''))
+        return
+      }
+      const catSet = new Set()
+      for (let i = n; i < char.length; i++) {
+        //如果有相同的交换，则不需要处理枝减。
+        if (catSet.has(char[i])) continue
+        catSet.add(char[i])
+        // 被固定的位置和其他位置依次交换位置
+        {
+          const t = char[n]
+          char[n] = char[i]
+          char[i] = t
+        }
+        // 递归下一个位置
+        dsf(n + 1)
+        // 被交换的位置需要回溯归位。
+        {
+          const t = char[n]
+          char[n] = char[i]
+          char[i] = t
+        }
+      }
+    }
+    dsf(0)
+    return res.sort()
+  }
+
+
+  // 方法二：回溯
+  /**
+   * @param {string} s
+   * @return {string[]}
+   */
+  var permutation = function (s) {
+    var res = new Set()
+    var path = []
+    var visited = []
+    dfsHelper([...s], path, res, visited)
+    return Array.from(res)
+  };
+
+  function dfsHelper(arr, path, res, visited) {
+    if (arr.length === path.length) { //说明走到底(叶子节点)
+      res.add(path.join(''))
+      return
+    }
+
+    for (let i = 0; i < arr.length; i++) {
+      if (visited[i]) {
+        continue
+      }
+      visited[i] = true
+      //进入下一层
+      path.push(arr[i])
+      dfsHelper(arr, path, res, visited)
+      path.pop()
+      visited[i] = false
+    }
+
+  }
+</script>
+</body>
+</html>
