@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>二叉树中和为某一值的路径</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/
+
+  /**
+   * Definition for a binary tree node.
+   * function TreeNode(val) {
+   *     this.val = val;
+   *     this.left = this.right = null;
+   * }
+   */
+  /**
+   * @param {TreeNode} root
+   * @param {number} sum
+   * @return {number[][]}
+   */
+    //方法一：先找出所有的路径，再分别看各个路径的和是否为sum
+    // 未通过编译
+  var pathSum = function (root, sum) {
+      let res = []
+      let allPathes = allPathes(root)
+      for (let i = 0; i < allPathes.length; i++) {
+        if (pathAdd(allPathes[i]) === sum) res.push(allPathes[i])
+      }
+      return res
+    };
+
+  // 求每条路径的和
+  function pathAdd(arr) {
+    let sum = 0
+    if (!arr.length) return 0
+    else {
+      arr.map(item => {
+        sum += item
+      })
+      return sum
+    }
+  }
+
+  // 求二叉树所有的路径
+  function allPathes(root) {
+    if (!root) return null
+    let linkArr = []
+    deepRoot(root, [])
+    return linkArr
+  }
+
+  function deepRoot(root, link) {
+    let nextLink = link.length ? link.push(root.val) : [root.val]
+    if (!root.left && !root.right) linkArr.push(nextLink)
+    else if (root.left) deepRoot(root.left, nextLink)
+    else if (root.right) deepRoot(root.right, nextLink)
+  }
+
+
+  // 方法二：回溯算法
+  var pathSum = function (root, sum) {
+    if (!root) return []
+    let ans = []
+    helper(root, ans, [], sum)
+    return ans
+  };
+  const helper = (root, ans, path, sum) => {
+    if (!root) return
+    sum -= root.val
+    path.push(root.val)
+    if (sum === 0 && root.left === null && root.right === null) {
+      ans.push(Array.from(path))  // 浅拷贝
+    }
+    helper(root.left, ans, path, sum)
+    helper(root.right, ans, path, sum)
+    path.pop()
+  }
+
+  const path = [1, 2, 3]
+  console.log(pathAdd(path))
+</script>
+</body>
+</html>
