@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>树的子结构</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/shu-de-zi-jie-gou-lcof/
+
+  /**
+   * Definition for a binary tree node.
+   * function TreeNode(val) {
+   *     this.val = val;
+   *     this.left = this.right = null;
+   * }
+   */
+  /**
+   * @param {TreeNode} A
+   * @param {TreeNode} B
+   * @return {boolean}
+   */
+  var isSubStructure = function(A, B) {
+    // 如果任何一棵树为空，都会返回false
+    if (!A || !B) return false
+
+    // 考察AB是否是同一棵树
+    // 如果不是，则递归考察A的左子树和B是不是同一颗，同理，再比较A的右子树和B
+    return isSameTree(A, B) || isSubStructure(A.left, B) || isSubStructure(A.right, B)
+  }
+
+  // 判断两棵树是不是同一棵树
+  function isSameTree(tree1, tree2) {
+    // 2子树是空的
+    if (!tree2) return true
+
+    // 1子树是空的，则不会是同一棵树
+    if (!tree1) return false
+    // 如果两棵树根节点值不一样，则不是同一颗树
+    if (tree1.val !== tree2.val) return false
+
+    // 递归考察左子树，右子树
+    return isSameTreet(tree1.left, tree2.left) && isSameTreet(tree1.right, tree2.right)
+  }
+</script>
+</body>
+</html>
