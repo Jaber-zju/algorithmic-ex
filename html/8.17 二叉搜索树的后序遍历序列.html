@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>二叉搜索树的后序遍历序列</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof/
+
+  /**
+   * @param {number[]} postorder
+   * @return {boolean}
+   */
+  var verifyPostorder = function(postorder) {
+    // 如果后序遍历为空，则返回true
+    if (!postorder.length) return true
+    // 后序遍历中：[左，右，根]
+    // 遍历的最后一个是根节点，获取根节点
+    let root = postorder.pop()
+
+    // 设置一个布尔值，用来判断遍历中是否有右子树，如果有，flag=true；否则，flag = false
+    let flag = false
+
+    // 分别用来保存左右子树的节点
+    let left = []
+    let right = []
+    // 用来标记第一个比根节点大的数的位置，即右子树开始的位置
+    let index = 0
+    for (let i = 0; i < postorder.length; i++) {
+      if (postorder[i] > root) {
+        index = i
+        // 有比根节点大的数，flag = true，立马跳出循环
+        flag = true
+        break
+      }
+    }
+    // 有右子树的话，分别获取左右子树的节点；没有右子树的话，就都是左子树的节点
+    if (flag) {
+      left = postorder.slice(0, index)
+      right = postorder.slice(index)
+    } else {
+      left = postorder.slice(0)
+    }
+    // 左子树中应该都是比root小，右子树中应该都是比root大
+    let resLeft = left.filter(item => item > root)
+    let resRight = right.filter(item => item < root)
+    // 如果左子树中出现比root大的数或者右子树中出现比root小的数，则返回false
+    if (resLeft.length > 0 || resRight.length > 0) return false
+
+    // 递归验证左右子树是否满足后序遍历要求
+    return verifyPostorder(left) && verifyPostorder(right)
+  }
+
+  const arr = [1,2,5,10,6,9,4,3]
+  console.log(verifyPostorder(arr))
+</script>
+</body>
+</html>
