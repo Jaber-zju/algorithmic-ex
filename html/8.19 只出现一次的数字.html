@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>只出现一次的数字</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/single-number/
+
+  /**
+   * @param {number[]} nums
+   * @return {number}
+   */
+  var singleNumber = function(nums) {
+    for (let i = 0; i < nums.length; i++) {
+      if (nums.indexOf(nums[i]) === nums.lastIndexOf(nums[i])) return nums[i]
+    }
+  }
+
+  const nums = [1,0,1]
+  console.log(singleNumber(nums))
+
+</script>
+</body>
+</html>
