@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>矩阵中的路径</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目描述：https://leetcode-cn.com/problems/ju-zhen-zhong-de-lu-jing-lcof/
+
+  /**
+   * @param {character[][]} board
+   * @param {string} word
+   * @return {boolean}
+   */
+  let exist = function (board, word) {
+    //这里可以采用回溯算法的思想，和八皇后问题类似
+    /*const xLen = board.length
+    const yLen = board[0].length
+    const k = 0
+    for (let x = 0; x < xLen; x++) {
+      for (let y = 0; y < yLen; y++) {
+        if (findFun(board, word, x, y, k, xLen, yLen)) return true
+      }
+    }
+    return false
+  }*/
+
+  //用于判断board[x][y]的上下左右是否有work[k+1]，若有返回true
+  //这里有个细节，没必要一直求值的数据就以参数的形式传到函数中，不要每次都计算，比如此题中的xLen，yLen
+  /*function findFun(board, word, x, y, k, xLen, yLen) {
+    if (x < 0 || x >= xLen || y < 0 || y >= yLen || board[x][y] !== word[k])
+      return false
+    if (k === word.length - 1)//word到底了
+      return true
+    let temp = board[x][y]
+    board[x][y] = '-'
+    let res = findFun(board, word, x - 1, y, k + 1, xLen, yLen) || findFun(board, word, x, y + 1, k + 1, xLen, yLen) || findFun(board, word, x + 1, y, k + 1, xLen, yLen) || findFun(board, word, x, y - 1, k + 1, xLen, yLen);//上 右 下 左
+    board[x][y] = temp
+    return res
+  }*/
+
+
+  // 方法二：
+  let row = board.length
+  let col = board[0].length
+
+  let dfs = function (i, j, board, word, index) {
+    if (i < 0 || i >= row || j < 0 || j > col || board[i][j] !== word[index]) return false // 判断不符合条件
+    if (index === word.length - 1) return true  // word遍历完了
+    let tmp = board[i][j]  // 记录到board的值
+    board[i][j] = '-'      // 锁上，因为后续的递归是4个方向上的，无法保证上一个方向的值
+    let res = dfs(i - 1, j, board, word, index + 1) || dfs(i + 1, j, board, word, index + 1) || dfs(i, j - 1, board, word, index + 1) || dfs(i, j + 1, board, word, index + 1);
+    board[i][j] = tmp   // 恢复现场
+    return res
+
+  }
+
+  // 遍历整个board，找到初始位置点
+  for (let i = 0; i < row; i++) {
+    for (let j = 0; j < col; j++) {
+      if (dfs(i, j, board, word, 0)) return true
+    }
+  }
+  // 没找到
+  return false
+
+</script>
+</body>
+</html>
