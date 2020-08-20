@@ -29,8 +29,17 @@
         res.push({[item]: obj[item]})
       })
 
-      // 对单词出现频率进行排序
-      res.sort((a, b) => b[Object.keys(b)[0]] - a[Object.keys(a)[0]])
+      // 对单词出现频率进行降序排序，若次数一样，则按照字母顺序升序排序
+      res.sort((a, b) => {
+        // 若次数一样，则按照字母顺序升序排序
+        if (b[Object.keys(b)[0]] === a[Object.keys(a)[0]]) {
+          return Object.keys(a)[0].charCodeAt(0) - Object.keys(b)[0].charCodeAt(0)
+        } else {
+        // 对单词出现频率进行降序排序
+          return b[Object.keys(b)[0]] - a[Object.keys(a)[0]]
+        }
+      })
+      console.log(res)
       // 截取次数最多的k个单词，组成对象数组
       let kWord = res.slice(0, k)
 
@@ -43,7 +52,7 @@
     }
   }
 
-  console.log(wordFrequency('the day is sunny the the is tomorrow', 2))
+  console.log(wordFrequency('athe day bis esunny athe athe bis ctomorrow', 2))
 
 </script>
 </body>
