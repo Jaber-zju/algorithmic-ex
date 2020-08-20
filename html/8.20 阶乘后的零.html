@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>阶乘后的零</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/factorial-trailing-zeroes/
+
+  /**
+   * @param {number} n
+   * @return {number}
+   */
+  const trailingZeroes = function (n) {
+    // 方法一
+    let res = 0
+    while (n >= 5) {
+      let k = Math.floor(n / 5)
+      res += k
+      n = k
+    }
+    return res
+
+
+    // 方法二
+    if (n < 5) {
+      return 0
+    } else {
+      let k = Math.floor(n / 5)
+      return k + trailingZeroes(k)
+    }
+
+    console.log(trailingZeroes(10))
+
+    function jieCheng(n) {
+      if (n <= 0) return 0
+      else if (n === 1) return 1
+      else {
+        return n && n * jieCheng(n - 1)
+      }
+    }
+
+  // console.log(jieCheng(30))
+
+</script>
+</body>
+</html>
