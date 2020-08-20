@@ -7,13 +7,14 @@
 <body>
 
 <script type="text/javascript">
-  const wordFrequency = (str) => {
+  // 统计单词出现的频率，并输出出现次数前k名的单词
+  const wordFrequency = (str, k) => {
     if (!str.trim()) return null
     else {
       let arr = str.trim().split(' ')
-      console.log(arr)
       let obj = {}
       let res = []
+      // 统计单词出现的频率，用一个对象保存
       for (let i = 0; i < arr.length; i++) {
         let word = arr[i]
         if (obj[word]) {
@@ -23,15 +24,26 @@
         }
       }
 
+      // 用数组形式保存每个单词出现的频率次数，且每个单词：次数都是一个独立的对象
       Object.keys(obj).forEach(item => {
-        res.push({[item]: {count: obj[item]}})
+        res.push({[item]: obj[item]})
       })
-      // res.sort((a, b) => a.count - b.count)
-      return res
+
+      // 对单词出现频率进行排序
+      res.sort((a, b) => b[Object.keys(b)[0]] - a[Object.keys(a)[0]])
+      // 截取次数最多的k个单词，组成对象数组
+      let kWord = res.slice(0, k)
+
+      // 遍历对象数组，取出每一个对象的key值，即出现次数最多的单词
+      let result = []
+      kWord.forEach(item => {
+        result.push(Object.keys(item)[0])
+      })
+      return result
     }
   }
 
-  console.log(wordFrequency('the day is sunny the the'))
+  console.log(wordFrequency('the day is sunny the the is tomorrow', 2))
 
 </script>
 </body>
