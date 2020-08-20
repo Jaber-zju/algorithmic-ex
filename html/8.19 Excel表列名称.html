@@ -39,11 +39,10 @@
       if (str.trim().length === 1) {
         res = str.charCodeAt(0) - 64
       } else {
-        // 第一个字母
-        let num1 = (str.charCodeAt(0) - 64) * 26 + 1
-        // 第二个字母
-        let num2 = str.charCodeAt(1) - 65
-        res = num1 + num2
+        for (let i = 0; i < str.length; i++) {
+          let num1 = (str.charCodeAt(i) - 64) * Math.pow(26, str.length-1-i)
+          res += num1
+        }
       }
       return res
     }
