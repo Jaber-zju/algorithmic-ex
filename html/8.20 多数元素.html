@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>多数元素</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/majority-element/
+
+  /**
+   * @param {number[]} nums
+   * @return {number}
+   */
+  var majorityElement = function(nums) {
+    if (!nums.length) return null
+    const len = nums.length / 2
+    let res = 0
+    let map = new Map()
+    nums.forEach(item => {
+      let count = map.get(item) ? map.get(item) + 1 : 1
+      map.set(item, count)
+    })
+    let newNums = nums.filter((item, index, arr) => arr.indexOf(item) === index)
+    newNums.forEach(item => {
+      if (map.get(item) > len) res = item
+    })
+    return res
+  }
+
+  const nums = [2,2,1,1,1,2,2]
+  console.log(majorityElement(nums))
+
+</script>
+</body>
+</html>
