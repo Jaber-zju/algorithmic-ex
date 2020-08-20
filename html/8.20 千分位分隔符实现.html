@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>千分位分隔符实现</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  function qianFen(num) {
+    num = num + ''
+    if (num.length < 4) return num
+    else {
+      let res = []
+      let len = num.length
+      let count = 3
+      let headCount = len % 3
+      for (let i = 0; i < len;) {
+        if (i === 0 && headCount !== 0) {
+          res.push(num.slice(i, headCount))
+          i += headCount
+        } else {
+          res.push(num.slice(i, i+count))
+          i += count
+        }
+      }
+      return res.join(',')
+    }
+  }
+
+  console.log(qianFen(1100000))
+
+</script>
+</body>
+</html>
