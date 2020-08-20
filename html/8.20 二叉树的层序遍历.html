@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>二叉树的层序遍历</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/binary-tree-level-order-traversal/
+
+  /**
+   * Definition for a binary tree node.
+   * function TreeNode(val) {
+   *     this.val = val;
+   *     this.left = this.right = null;
+   * }
+   */
+  /**
+   * @param {TreeNode} root
+   * @return {number[][]}
+   */
+  var levelOrder = function (root) {
+    // 方法一
+    if (!root) return []
+    else {
+      let now = [root]
+      let res = []
+      let depth = 0
+      while (true) {
+        let helper = []
+        while (now.length) {
+          let node = now.shift()
+          res[depth].push(node?.val)
+          node.left && helper.push(node.left)
+          node.right && helper.push(node.right)
+        }
+        depth++
+        if (helper.length) now = helper
+        else return res
+      }
+    }
+
+
+    // 方法二
+    const res = []
+
+    function traversal(root, depth) {
+      if (root !== null) {
+        if (!res[depth]) {
+          res[depth] = []
+        }
+        res[depth].push(root.val)
+        traversal(root.left, depth + 1)
+        traversal(root.right, depth + 1)
+      }
+    }
+
+    traversal(root, 0)
+    return res
+  }
+
+</script>
+</body>
+</html>
