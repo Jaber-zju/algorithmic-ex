@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Excel表列名称</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/excel-sheet-column-title/
+
+  /**
+   * @param {number} n
+   * @return {string}
+   */
+    // 数字转字母
+  var convertToTitle = function (n) {
+      //10进制转26进制,取余法
+      let res = ""
+      while (n > 0) {
+        let temp = n % 26
+        n = Math.floor(n / 26)
+        if (temp === 0) {
+          temp = 26
+          n--;
+        }
+        res = String.fromCharCode(temp + 64) + res
+      }
+      return res
+    }
+  console.log(convertToTitle(81))
+
+
+  // 字母转数字，A-Z的字符编码是 65-90
+  const convertToNum = (str) => {
+    if (!str.trim()) return 0
+    else {
+      let res = 0
+      if (str.trim().length === 1) {
+        res = str.charCodeAt(0) - 64
+      } else {
+        // 第一个字母
+        let num1 = (str.charCodeAt(0) - 64) * 26 + 1
+        // 第二个字母
+        let num2 = str.charCodeAt(1) - 65
+        res = num1 + num2
+      }
+      return res
+    }
+  }
+  console.log(convertToNum('ZZ'))
+</script>
+</body>
+</html>
