@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>统计词频</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  const wordFrequency = (str) => {
+    if (!str.trim()) return null
+    else {
+      let arr = str.trim().split(' ')
+      console.log(arr)
+      let obj = {}
+      let res = []
+      for (let i = 0; i < arr.length; i++) {
+        let word = arr[i]
+        if (obj[word]) {
+          obj[word]++
+        } else {
+          obj[word] = 1
+        }
+      }
+
+      Object.keys(obj).forEach(item => {
+        res.push({[item]: {count: obj[item]}})
+      })
+      // res.sort((a, b) => a.count - b.count)
+      return res
+    }
+  }
+
+  console.log(wordFrequency('the day is sunny the the'))
+
+</script>
+</body>
+</html>
