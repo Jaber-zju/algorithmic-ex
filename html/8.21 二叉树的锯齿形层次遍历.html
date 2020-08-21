@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>二叉树的锯齿形层次遍历</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/
+
+
+  /**
+   * Definition for a binary tree node.
+   * function TreeNode(val) {
+   *     this.val = val;
+   *     this.left = this.right = null;
+   * }
+   */
+  /**
+   * @param {TreeNode} root
+   * @return {number[][]}
+   */
+  var zigzagLevelOrder = function(root) {
+    if (!root) return []
+    else {
+      let res = []
+
+      function traversal(root, depth) {
+        if (root) {
+          if (!res[depth]) {
+            res[depth] = []
+          }
+          res[depth].push(root.val)
+          traversal(root.left, depth+1)
+          traversal(root.right, depth+1)
+        }
+      }
+
+      traversal(root, 0)
+
+      res.map((item, index) => {
+        if (index % 2 === 1) res[index] = item.reverse()
+      })
+
+      return res
+    }
+  }
+</script>
+</body>
+</html>
