@@ -25,6 +25,7 @@
     if (!nums.length) return null
     if (nums.length === 1) return new TreeNode(nums[0])
     else {
+      // 一定要加Math.floor()
       let center = Math.floor(nums.length / 2)
       let root = nums[center]
 
