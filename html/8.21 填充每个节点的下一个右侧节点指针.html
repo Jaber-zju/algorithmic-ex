@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>填充每个节点的下一个右侧节点指针</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node/
+
+
+  /**
+   * // Definition for a Node.
+   * function Node(val, left, right, next) {
+   *    this.val = val === undefined ? null : val;
+   *    this.left = left === undefined ? null : left;
+   *    this.right = right === undefined ? null : right;
+   *    this.next = next === undefined ? null : next;
+   * };
+   */
+
+  /**
+   * @param {Node} root
+   * @return {Node}
+   */
+  var connect = function(root) {
+    if (!root) return null
+    else {
+      let now = [root]
+      while (true) {
+        let helper = []
+        for (let i = 0; i < now.length; i++) {
+          if (i === now.length - 1) {
+            now[i].next = null
+          } else {
+            now[i].next = now[i+1]
+          }
+          now[i].left && helper.push(now[i].left)
+          now[i].right && helper.push(now[i].right)
+        }
+
+        if (helper.length) now = helper
+        return root
+      }
+    }
+  };
+</script>
+</body>
+</html>
