@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>二叉树中的最大路径和</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/
+
+
+  /**
+   * Definition for a binary tree node.
+   * function TreeNode(val) {
+   *     this.val = val;
+   *     this.left = this.right = null;
+   * }
+   */
+  /**
+   * @param {TreeNode} root
+   * @return {number}
+   */
+    // 方法一：先遍历找到所有的路径，然后遍历各个路径的和，其中：当路径首尾是负的时，去掉这个节点，但是不通过
+  var maxPathSum = function (root) {
+      if (!root) return 0
+      else {
+        let res = []
+        let sum = []
+        allPathes(root, res, [])
+
+        for (let i = 0; i < res.length; i++) {
+          let path = res[i]
+          let add = 0
+          if (path[0] < 0) path.shift()
+          if (path[path.length - 1] < 0) path.pop()
+          path.map(item => {
+            add = add + item
+          })
+          sum.push(add)
+        }
+
+        return Math.max.apply(Math, sum)
+      }
+    }
+
+  function allPathes(root, res, path) {
+    if (root) {
+      path.push(root.val)
+      if (!root.left && !root.right) {
+        res.push(Array.from(path))
+      }
+      allPathes(root.left, res, path)
+      allPathes(root.right, res, path)
+      path.pop()
+    }
+  }
+
+
+  // 方法二
+  var maxPathSum = function (root) {
+    let ans = Number.MIN_SAFE_INTEGER;
+    const maxSum = (node) => {
+      if (node === null) return 0;
+      let leftGain = Math.max(maxSum(node.left), 0);
+      let rightGain = Math.max(maxSum(node.right), 0);
+      let allGain = node.val + leftGain + rightGain;
+      ans = Math.max(ans, allGain);
+      return node.val + Math.max(leftGain, rightGain);
+    }
+    maxSum(root);
+    return ans;
+  }
+</script>
+</body>
+</html>
