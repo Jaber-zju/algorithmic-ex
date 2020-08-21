@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>有序链表转换二叉搜索树</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/
+
+
+  /**
+   * Definition for singly-linked list.
+   * function ListNode(val, next) {
+   *     this.val = (val===undefined ? 0 : val)
+   *     this.next = (next===undefined ? null : next)
+   * }
+   */
+  /**
+   * Definition for a binary tree node.
+   * function TreeNode(val, left, right) {
+   *     this.val = (val===undefined ? 0 : val)
+   *     this.left = (left===undefined ? null : left)
+   *     this.right = (right===undefined ? null : right)
+   * }
+   */
+  /**
+   * @param {ListNode} head
+   * @return {TreeNode}
+   */
+  var sortedListToBST = function(head) {
+    if (!head) return null
+    let nodes = []
+    while (head) {
+      nodes.push(head.val)
+      head = head.next()
+    }
+    return sortedArrayToBST(nodes)
+  };
+
+  function sortedArrayToBST (nums) {
+    if (!nums.length) return null
+    if (nums.length === 1) return new TreeNode(nums[0])
+    else {
+      // 一定要加Math.floor()
+      let center = Math.floor(nums.length / 2)
+      let root = nums[center]
+
+      const node = new TreeNode(root)
+
+      node.left = sortedArrayToBST(nums.slice(0, center))
+      node.right = sortedArrayToBST(nums.slice(center+1))
+
+      return node
+    }
+  }
+</script>
+</body>
+</html>
