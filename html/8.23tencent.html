@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    table.game {
+      font-size: 14px;
+      border-collapse: collapse;
+      width: 100%;
+      table-layout: fixed;
+    }
+    table.game td {
+      border: 1px solid #e1e1e1;
+      padding: 0;
+      height: 30px;
+      text-align: center;
+    }
+    table.game td.current{
+      background: #1890ff;
+    }
+    table.game td.wrap{
+      background: #f5f5f5;
+    }
+  </style>
+</head>
+
+<div id="jsContainer">
+  <table class="game">
+    <tbody>
+    <tr><td></td><td></td><td></td><td></td><td class="wrap"></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td class="wrap"></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td class="wrap"></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td class="wrap"></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td class="wrap"></td><td class="wrap"></td><td class="wrap"></td><td class="wrap"></td><td class="current"></td><td class="wrap"></td><td class="wrap"></td><td class="wrap"></td><td class="wrap"></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td class="wrap"></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td class="wrap"></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td class="wrap"></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td class="wrap"></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+</div>
+<body>
+
+<script type="text/javascript">
+  // const father = document.getElementById('jsContainer')
+  // father.onclick = function (event) {
+  //   let cur = event.target
+  //   let tr = cur.parentElement
+  //   let allTd = document.getElementsByTagName('td')
+  //   blank(allTd)
+  //   let rowTds = tr.children
+  //   wrap(rowTds)
+  //   const count = rowTds.length
+  //
+  //
+  //
+  //   // cur.setAttribute('class', 'current')
+  // }
+
+  let allTd = document.getElementsByTagName('td')
+  for (let i = 0; i < allTd.length; i++) {
+    let cur = allTd[i]
+    let tr = cur.parentElement
+    let rowTds = tr.children
+    const len = rowTds.length
+    cur.onclick = function () {
+      blank(allTd)
+      wrap(rowTds)
+
+      let index1 = i
+      let index2 = i
+      let brothers = []
+      while (index1 > len) {
+        let brother = allTd[index1 - len]
+        brothers.push(brother)
+        index1 = index1 - len
+      }
+      while (index2 < allTd.length) {
+        let brother = allTd[index2 + len]
+        brothers.push(brother)
+        index2 = index2 + len
+      }
+
+      current(cur)
+      wrap(brothers)
+    }
+  }
+
+
+
+  function current(node) {
+    node.setAttribute('class', 'current')
+  }
+
+  function blank(arr) {
+    for (let i = 0; i < arr.length; i++) {
+      arr[i].setAttribute('class', '')
+    }
+  }
+
+  function wrap(arr) {
+    for (let i = 0; i < arr.length; i++) {
+      arr[i].setAttribute('class', 'wrap')
+    }
+  }
+
+</script>
+</body>
+</html>
