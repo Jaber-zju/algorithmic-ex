@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // const arr = [1,2,[3],[[4]]]
+  //
+  //
+  // function myFlat(arr) {
+  //   let res = []
+  //   for (let i = 0; i < arr.length; i++) {
+  //     if(Array.isArray(arr[i])) {
+  //       res = res.concat(arguments.callee(arr[i]))
+  //     } else {
+  //       res.push(arr[i])
+  //     }
+  //   }
+  //   return res
+  // }
+
+  const arr = [[0, [19, [42], 3], 2], [3, 4, [[9, 5], 10, 12], 6], 7, 8]
+
+  Array.prototype.myFlat = function (num = 1) {
+    if (Array.isArray(this)) {
+      let _this = this
+      for (let i = 0; i < num; i++) {
+        _this = [].concat(..._this)
+      }
+      ;
+      return _this
+    }
+    return this
+  }
+
+  console.log(arr.myFlat(3))
+
+</script>
+</body>
+</html>
