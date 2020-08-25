@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>杨辉三角II</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/pascals-triangle-ii/
+
+  /**
+   * @param {number} rowIndex
+   * @return {number[]}
+   */
+  // 方法一：推荐使用
+  var getRow = function(rowIndex) {
+    let res = generate(rowIndex+1)
+    return res
+  }
+
+  const num = 3
+  console.log(getRow(num))
+
+  function generate(numRows) {
+    let result = []
+    if (numRows === 0) return []
+    else if (numRows === 1) return [1]
+    else if (numRows === 2) return [1,1]
+    else {
+      let prev = [1, 1]
+      for (let i = 3; i <= numRows; i++) {
+        let arr = prev
+        let len = arr.length
+        let newarr = new Array(i)
+        for (let j = 0; j < len; j++) {
+          if (j === 0) {
+            newarr[j] = arr[j]
+          } else {
+            newarr[j] = arr[j - 1] + arr[j]
+          }
+        }
+        newarr[len] = arr[len - 1]
+
+        result = newarr
+        // 用变量保存上一个数组，不再保存所有的行结果，提高性能
+        prev = newarr
+        newarr = []
+      }
+      return result
+    }
+  }
+
+
+  // 方法二
+  var getRow = function(rowIndex) {
+    let res = generate(rowIndex+1)
+    return res[rowIndex]
+  }
+
+  const num = 3
+  console.log(getRow(num))
+
+  function generate(numRows) {
+    let prev = [[1]]
+    let next = [[1], [1, 1]]
+    let res = [[1], [1, 1]]
+    if (numRows === 0) return []
+    else if (numRows === 1) return prev
+    else if (numRows === 2) return next
+    else {
+      for (let i = 3; i <= numRows; i++) {
+        let arr = res[res.length - 1]
+        let len = arr.length
+        let newarr = new Array(i)
+        for (let j = 0; j < len; j++) {
+          if (j === 0) {
+            newarr[j] = arr[j]
+          } else {
+            newarr[j] = arr[j - 1] + arr[j]
+          }
+        }
+        newarr[len] = arr[len - 1]
+
+        res.push(newarr)
+        newarr = []
+      }
+      return res
+    }
+  }
+</script>
+</body>
+</html>
