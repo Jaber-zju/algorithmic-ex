@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>验证回文串</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/valid-palindrome/
+
+
+  /**
+   * @param {string} s
+   * @return {boolean}
+   */
+  var isPalindrome = function(s) {
+    if (!s.length) return true
+    else {
+      const reg = /[a-zA-Z]*[0-9]*/g
+      s = s.match(reg).join('').toLowerCase()
+      console.log(s)
+
+      if (!reg.test(s)) return false
+
+      const len = s.length
+      const index = len / 2
+      if (len % 2 === 1) {
+        let left = s.substring(0, index)
+        let right = s.substring(index+1).split('').reverse().join('')
+        for (let i = 0; i < left.length; i++) {
+          if (left[i] !== right[i]) return false
+        }
+        return true
+      } else {
+        let left = s.substring(0, index)
+        let right = s.substring(index).split('').reverse().join('')
+        for (let i = 0; i < left.length; i++) {
+          if (left[i] !== right[i]) return false
+        }
+        return true
+      }
+    }
+  }
+
+  const s =  ''
+  console.log(isPalindrome(s))
+</script>
+</body>
+</html>
