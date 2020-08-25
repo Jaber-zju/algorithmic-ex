@@ -6,9 +6,11 @@
  * @param {number} n
  * @return {number}
  */
+// 厄拉多塞筛法
+// 每计算一个数，都要把它的倍数去掉。到了n，数一下留下了几个数
 var countPrimes = function (n) {
   let count = 0
-  let signs = []
+  let signs = new Array(n + 1)
   for (let i = 2; i < n; i++) {
     if (!signs[i]) {
       count++
