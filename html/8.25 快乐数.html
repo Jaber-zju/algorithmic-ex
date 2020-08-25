@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>快乐数</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/happy-number/
+
+
+  /**
+   * @param {number} n
+   * @return {boolean}
+   */
+  var isHappy = function(n) {
+    // 将计算过的n保存在set中，避免下一次碰到的时候还要计算
+    if (n === 1) return true
+    const list = new Set()
+    while(!list.has(n)) {
+      list.add(n)
+      let sum = 0
+      while(n) {
+        const value = n % 10
+        sum += (value * value)
+        n = parseInt(n / 10)
+      }
+      if (sum === 1) return true
+      n = sum
+    }
+    return false
+
+
+    // 方法二：分析打表法
+    const list = new Set([1, 7, 10, 13, 19, 23, 28, 31, 32, 44, 49, 68, 70, 79, 82, 86, 91, 94, 97])
+    // 注意边界处理
+    while(n >= 100) {
+      let sum = 0
+      while(n) {
+        const value = n % 10
+        sum += (value * value)
+        n = parseInt(n / 10)
+      }
+      n = sum
+    }
+    return list.has(n)
+
+
+  }
+
+  console.log(isHappy(19))
+</script>
+</body>
+</html>
