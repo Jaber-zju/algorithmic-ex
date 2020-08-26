@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>数字 1 的个数</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/number-of-digit-one/
+
+
+  /**
+   * @param {number} n
+   * @return {number}
+   */
+  var countDigitOne = function(n) {
+    // 方法一
+    // const reg = /[1]/
+    // let count = 0
+    // for (let i = 1; i <= n; i++) {
+    //   let num = i + ''
+    //   if (num.length === 1) {
+    //     if (reg.test(num)) count++
+    //   } else {
+    //     for (let j = 0; j < num.length; j++) {
+    //       if (reg.test(num[j])) count++
+    //     }
+    //   }
+    // }
+    // return count
+
+
+    // 方法二
+    let count = 0
+
+    for (let i = 1; i <= n; i *= 10) {
+      let divide = i * 10
+      let p = Math.floor(n / divide), k = n % divide, rest = 0
+      count += p * i
+      rest = (k > (2 * i - 1)) ? i : ((k < i) ? 0 : k - i + 1)
+      count += rest
+    }
+    return count
+  }
+
+  console.log(countDigitOne(13))
+</script>
+</body>
+</html>
