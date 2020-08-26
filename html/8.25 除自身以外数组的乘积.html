@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>除自身以外数组的乘积</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/product-of-array-except-self/
+
+
+  /**
+   * @param {number[]} nums
+   * @return {number[]}
+   */
+  var productExceptSelf = function (nums) {
+    let res = []
+    for (let i = 0; i < nums.length; i++) {
+      let arr = nums.slice(0, i).concat(nums.slice(i + 1))
+      res.push(chengji(arr))
+    }
+    return res
+  }
+
+  function chengji(arr) {
+    let ji = 1
+    if (arr.includes(0)) return 0
+    for (let i = 0; i < arr.length; i++) {
+      ji = ji * arr[i]
+    }
+    return ji
+  }
+
+
+  // 方法二
+  /**
+   * @param {number[]} nums
+   * @return {number[]}
+   */
+  var productExceptSelf = function (nums) {
+    const answer = []
+    for (let i = 0; i < nums.length; i++) {
+      answer[i] = nums.reduce(
+        (prev, cur, index) => {
+          if (index === i) {
+            return prev
+          }
+          return prev * cur
+        }, 1)
+    }
+    return answer
+  }
+
+
+  const nums = [1, 2, 3, 4]
+  console.log(productExceptSelf(nums))
+</script>
+</body>
+</html>
