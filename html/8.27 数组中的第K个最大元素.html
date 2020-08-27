@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>数组中的第K个最大元素</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/kth-largest-element-in-an-array/
+
+
+  /**
+   * @param {number[]} nums
+   * @param {number} k
+   * @return {number}
+   */
+  var findKthLargest = function(nums, k) {
+    if (!nums.length) return null
+    nums.sort((a, b) => b - a)
+    return nums[k-1]
+  }
+</script>
+</body>
+</html>
