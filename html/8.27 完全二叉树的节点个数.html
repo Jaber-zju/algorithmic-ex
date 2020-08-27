@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>完全二叉树的节点个数</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/count-complete-tree-nodes/
+
+
+  /**
+   * Definition for a binary tree node.
+   * function TreeNode(val) {
+   *     this.val = val;
+   *     this.left = this.right = null;
+   * }
+   */
+  /**
+   * @param {TreeNode} root
+   * @return {number}
+   */
+  var countNodes = function(root) {
+    if (!root) return 0
+    else {
+      let res = []
+
+      function traversal(root) {
+        if (root) {
+          res.push(root.val)
+          traversal(root.left)
+          traversal(root.right)
+        }
+      }
+
+      traversal(root)
+
+      return res.length
+    }
+  }
+</script>
+</body>
+</html>
