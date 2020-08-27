@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>岛屿数量</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // 题目链接：https://leetcode-cn.com/problems/number-of-islands/
+
+  /**
+   * @param {character[][]} grid
+   * @return {number}
+   */
+  var numIslands = function (grid) {
+    if (!grid.length) {
+      return 0;
+    }
+    let num = 0;
+    let row = grid.length;
+    let col = grid[0].length;
+    for (let i = 0; i < row; i++) {
+      for (let j = 0; j < col; j++) {
+        if (grid[i][j] == 1) {
+          num++;
+          let queue = [];
+          grid[i][j] = 0;
+          queue.push(i * col + j);
+          while (queue.length) {
+            let now = queue.shift();
+            let nr = parseInt(now / col);
+            let nc = now % col;
+            if (nr - 1 >= 0 && grid[nr - 1][nc] == 1) {
+              grid[nr - 1][nc] = 0;
+              queue.push((nr - 1) * col + nc);
+            }
+            if (nr + 1 < row && grid[nr + 1][nc] == 1) {
+              grid[nr + 1][nc] = 0;
+              queue.push((nr + 1) * col + nc);
+            }
+            if (nc - 1 >= 0 && grid[nr][nc - 1] == 1) {
+              grid[nr][nc - 1] = 0;
+              queue.push(nr * col + nc - 1);
+            }
+            if (nc + 1 < col && grid[nr][nc + 1] == 1) {
+              grid[nr][nc + 1] = 0;
+              queue.push(nr * col + nc + 1);
+            }
+          }
+        }
+      }
+    }
+    return num;
+  }
+
+
+  // 方法二
+  var numIslands = function (grid) {
+    if (grid.length === 0) return 0
+
+    const w = grid.length, h = grid[0].length
+    const d = [[1, 0], [-1, 0], [0, 1], [0, -1]]
+    let res = 0
+
+    function dfs(i, j) {
+      if (grid[i][j] === "0" || grid[i][j] === "*") return;
+
+      grid[i][j] = "*";
+      for (const [dx, dy] of d) {
+        const x = i + dx;
+        const y = j + dy;
+        if (x >= 0 && x < w && y >= 0 && y < h) dfs(x, y);
+      }
+      return true;
+    }
+
+    for (let i = 0; i < w; i++)
+      for (let j = 0; j < h; j++)
+        if (dfs(i, j)) res++
+
+    return res
+  }
+</script>
+</body>
+</html>
