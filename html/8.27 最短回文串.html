@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>最短回文串</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // https://leetcode-cn.com/problems/shortest-palindrome/
+
+
+  /**
+   * @param {string} s
+   * @return {string}
+   */
+
+  var shortestPalindrome = function (s) {
+    // 方法一
+    let n = s.length;
+    let reverse = s.split('').reverse().join('');
+    for (let i = 0; i < n; i++) {
+      if (s.substr(0, n - i) === reverse.substr(i))
+        return reverse.substr(0, i) + s
+    }
+    return ""
+
+
+    // 方法二: 先找到以下标0为起点的最长回文字符串
+    let [left, right] = [0, s.length - 1];
+    let rightIndex = right;
+    while (left < right) {
+      if (s[left] === s[right]) {
+        left++
+        right--;
+      } else {
+        left = 0;
+        right = --rightIndex;
+      }
+    }
+    let toAdd = s.slice(rightIndex + 1).split('').reverse().join('');
+    return toAdd + s
+  }
+
+
+</script>
+</body>
+</html>
