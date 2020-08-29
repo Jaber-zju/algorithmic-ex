@@ -15,14 +15,18 @@
   function showPreview(source) {
     // input为type时，存在属性files,包含里面的文件信息
     let file = source.files[0]
-    console.log(file)
+    const img = document.getElementById("img")
+
     if (window.FileReader) {
       let reader = new FileReader()
       reader.onloadend = function (e) {
-        const img = document.getElementById("img")
         img.src = e.target.result
       }
-      reader.readAsDataURL(file)
+      if (file) {
+        reader.readAsDataURL(file)
+      } else {
+        img.src = ""
+      }
     }
   }
 </script>
