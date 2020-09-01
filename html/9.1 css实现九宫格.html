@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
+  <title>css实现九宫格</title>
+  <style>
+    .container {
+      border: 5px solid #FF0000;
+      overflow: hidden; /*为了清除浮动*/
+    }
+
+    .container > div {
+      float: left;
+      width: 31.33%; /*这里所有的百分比都是父级元素的宽度的百分比*/
+      padding-bottom: 31.33%;
+      margin: 1%;
+      border-radius: 10%;
+      background-color: orange;
+    }
+
+  </style>
+</head>
+
+<body>
+<div class="container">
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+</div>
+</body>
+</html>
