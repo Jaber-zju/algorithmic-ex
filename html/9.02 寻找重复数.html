@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>寻找重复数</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // https://leetcode-cn.com/problems/find-the-duplicate-number/
+
+
+  /**
+   * @param {number[]} nums
+   * @return {number}
+   */
+  var findDuplicate = function(nums) {
+    let res = nums.filter((item, index, arr) => arr.indexOf(item) !== arr.lastIndexOf(item))
+    return res[0]
+  }
+</script>
+</body>
+</html>
