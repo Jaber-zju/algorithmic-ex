@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>3的幂</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // https://leetcode-cn.com/problems/power-of-three/
+
+
+  /**
+   * @param {number} n
+   * @return {boolean}
+   */
+  var isPowerOfThree = function (n) {
+    if (n <= 0) return false
+    while (n > 1) {
+      if (n % 3 === 0) {
+        n = n / 3
+      } else {
+        return false
+      }
+    }
+    return true
+  }
+
+  console.log(isPowerOfThree(1))
+</script>
+</body>
+</html>
