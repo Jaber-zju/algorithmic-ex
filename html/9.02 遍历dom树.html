@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+
+<body>
+<div>
+  <div>
+    <p></p>
+    <span></span>
+  </div>
+  <ul>
+    <li><a href=""></a></li>
+    <li><a href=""></a></li>
+    <li><a href=""></a></li>
+  </ul>
+</div>
+
+<script type="text/javascript">
+  //获取页面的根节点
+  var root = document.documentElement  //HTML   整个页面默认的所有DOM节点
+
+  var domTree = {type: '', children: []}
+
+  //封装一个函数用来获取DOM树的节点名称
+  function forDOM(root1) {
+    domTree.type = root1.nodeName
+    //获取根节点的子节点
+    var children = root1.children
+    //调用遍历所有子节点的函数
+    forDomChildren(children)
+  }
+
+  //封装一个函数,遍历所有的子节点并显示子节点名称
+  function forDomChildren(child) {
+    //遍历所有的子节点
+    for (var i = 0; i < child.length; i++) {
+      let el = {type: child[i].nodeName, children: child[i].children}
+      domTree.children.push(el)
+      //显示所有的子节点名称
+      getNodeName(child[i])
+      //判断子节点下面是否还有子节点,如果有继续遍历
+      child[i].children && forDOM(child[i])
+    }
+  }
+
+  //封装一个函数用来获取节点名称
+  function getNodeName(node) {
+    console.log('节点名称' + node.nodeName)
+  }
+
+  //调用函数,传入根节点
+  forDOM(root)
+
+  console.log(domTree)
+  /*执行流程
+   * 第一个函数:给出根节点,找到所有子节点 forDom()
+   * 获取这个根节点的子节点
+   *var chidren=根节点.children
+   * 调用第二个函数
+   *
+   * 第二个函数,给出所有子节点,把每个子节点名字显示出来
+   * for(var i=0;i<child.length;i++){}
+   * 每个子节点  child[i]
+   * child还有子节点,此时child变为根节点,继续遍历
+   * child[i].children && forDOM(child[i])
+   *
+   * 第三个函数 获取节点名称
+   * getNodeName()
+   */
+</script>
+</body>
+</html>
