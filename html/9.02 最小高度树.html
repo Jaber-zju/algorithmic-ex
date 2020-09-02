@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>最小高度树</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  // https://leetcode-cn.com/problems/minimum-height-trees/
+
+
+  // 解法实际就是拓扑排序的变种。每次选取入度为1的顶点，进行拓扑排序。得到的最后一轮即为结果。
+  var findMinHeightTrees = function (n, edges) {
+    let adjacent = [];
+    let indegrees = [];
+    for (let i = 0; i < n; i++) {
+      adjacent.push([]);
+      indegrees.push(0);
+    }
+
+    // 初始化邻接表（二维数组）和入度（一维数组）
+    edges.forEach(edge => {
+      adjacent[edge[0]].push(edge[1]);
+      adjacent[edge[1]].push(edge[0]);
+      indegrees[edge[0]]++;
+      indegrees[edge[1]]++;
+    });
+
+    // 取得入度为1的顶点集
+    let collection = [];
+    indegrees.forEach((item, index) => {
+      if (item === 1) {
+        collection.push(index);
+      }
+    });
+
+    while (collection.length) {
+      let temp = [];
+      // 对每个入度为1的顶点，将其指向的顶点入度减1
+      // 如果指向顶点的入度刚好减为1，则加入temp数组
+      collection.forEach(vertex => {
+        adjacent[vertex].forEach(lineTo => {
+          if (--indegrees[lineTo] === 1) {
+            temp.push(lineTo);
+          }
+        });
+      });
+
+      // temp数组为空，运行结束，返回最后一轮的collection，即是答案
+      if (!temp.length) {
+        return collection;
+      }
+
+      // 不为空，则作交换，下一轮继续
+      collection = temp;
+    }
+    return [0];
+  }
+
+</script>
+</body>
+</html>
