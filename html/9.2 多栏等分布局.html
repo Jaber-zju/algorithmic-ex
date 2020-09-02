@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>多栏等分布局</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .father {
+      display: flex;
+      width: 100%;
+      height: 600px;
+    }
+    .father div {
+      flex: 1;
+    }
+    .father div:nth-of-type(1) {
+      background-color: #1890ff;
+    }
+    .father div:nth-of-type(2) {
+      background-color: rebeccapurple;
+    }
+    .father div:nth-of-type(3) {
+      background-color: rosybrown;
+    }
+    .father div:nth-of-type(4) {
+      background-color: brown;
+    }
+    .father div:nth-of-type(5) {
+      background-color: green;
+    }
+  </style>
+</head>
+<body>
+<div class="father">
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+  <div>4</div>
+  <div>5</div>
+</div>
+
+<script type="text/javascript">
+
+</script>
+</body>
+</html>
