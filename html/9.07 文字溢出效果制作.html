@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <style>
+    /*.ellipsis {*/
+    /*  width: 200px;  !* IE6 needs any width *!*/
+    /*  white-space: nowrap;  !*强制不换行*!*/
+    /*  -o-text-overflow: ellipsis;    !* Opera 9-10 *!*/
+    /*  text-overflow: ellipsis;  !*文本溢出时,显示省略号 IE, WebKit (Safari, Chrome), Firefox 7, Opera 11*!*/
+    /*  overflow: hidden; !*内容超出,隐藏元素 *!*/
+    /*}*/
+
+
+    .ellipsis {
+      width: 200px;
+      display: -webkit-box; /*盒子模型微弹性伸缩模型*/
+      -webkit-box-orient: vertical; /*伸缩盒子的子元素垂直排列*/
+      overflow: hidden; /*内容超出,隐藏元素 */
+      -webkit-line-clamp: 2;
+    }
+  </style>
+</head>
+<body>
+<div class="ellipsis">
+  这是一行文字,需要溢出添加省略号,因为这行文字特别特别长
+</div>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>
+
