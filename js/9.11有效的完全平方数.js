@@ -6,6 +6,7 @@
  * @param {number} num
  * @return {boolean}
  */
+// 暴力破解法
 let isPerfectSquare = function (num) {
   if (!num || num === 1) return true
   else if (num === 2 || num === 3) return false
@@ -20,6 +21,7 @@ let isPerfectSquare = function (num) {
  * @param {number} num
  * @return {boolean}
  */
+// 二分法，设置两个指针
 let isPerfectSquare = function (num) {
   let low = 0;
   let high = num;
