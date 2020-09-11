@@ -8,7 +8,7 @@
  * @return {boolean}
  */
 // 方法一：暴力破解，无法通过
-var isSubsequence = function(s, t) {
+var isSubsequence = function (s, t) {
   if (!s.length) return true
   if (s.length < 3) {
     for (let i = 0; i < s.length; i++) {
@@ -26,7 +26,7 @@ var isSubsequence = function(s, t) {
       let index = t.indexOf(s[i])
       if (index === -1 || (i - temp < 0)) return false
       temp = i
-      t = t.substr(0, index) + t.substr(index+1)
+      t = t.substr(0, index) + t.substr(index + 1)
     }
     return true
   }
@@ -37,7 +37,7 @@ console.log(isSubsequence(s, t))
 
 
 // 方法二：使用正则
-var isSubsequence = function(s, t) {
+var isSubsequence = function (s, t) {
   return new RegExp([...s].join('[a-z]*')).test(t)
 };
 
