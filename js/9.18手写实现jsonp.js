@@ -37,4 +37,4 @@ jsonp(
   function () {
     console.log(param);
   }
-);
+)
