@@ -13,16 +13,17 @@
 //   }
 // }
 
+// 字符串排序，字母在前，数字在后，均按照升序排列
 function sort(str) {
   let letters = []
   let nums = []
   let res = ''
   for (let i = 0; i < str.length; i++) {
-    if (Number(str[i])) nums.push(Number(str[i]))
+    if (Number(str[i]) || Number(str[i]) === 0) nums.push(Number(str[i]))
     else letters.push(str[i])
   }
 
   res = letters.sort((a, b) => a.charCodeAt(0) - b.charCodeAt(0)).join('') + nums.sort((a, b) => a - b).join('')
   return res
 }
-console.log(sort('cab3d21'))
+console.log(sort('c0ab3d2190g'))
