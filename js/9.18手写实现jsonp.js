@@ -43,4 +43,4 @@ function lookYJB(name) {
   console.log('My name is ' + name)
 }
 
-lookYJB('于杰保')
+lookYJB('于杰保');
